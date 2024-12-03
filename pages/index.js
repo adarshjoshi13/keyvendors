@@ -14,6 +14,7 @@ import AboutUs from "components/home/AboutUs";
 import Process from "components/home/Process";
 import { fetchData } from "services/api";
 import TopServices from "components/home/TopServices";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const getStaticProps = async () => {
   const banners = await fetchData(`banners`);

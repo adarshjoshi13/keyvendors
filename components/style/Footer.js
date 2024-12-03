@@ -37,7 +37,7 @@ export default function Footer() {
 
   return (
     <>
-      <Box sx={{ bgcolor: "secondary.main", p: 6 }} component="footer">
+      <Box sx={{ bgcolor: "secondary.main", p:{ xs: 2, sm: 2, md: 6 }}} component="footer">
         <Grid container spacing={2}>
           <Grid item lg={1}>
             {" "}
@@ -48,7 +48,7 @@ export default function Footer() {
               <Typography variant="h6" align="left" gutterBottom>
                 Key Vendors India Pvt.Ltd.
               </Typography>
-              <Typography variant="caption" align="left" component="p">
+              <Typography variant="caption" align="left" component="p" sx={{paddingBottom:{xs:2,sm:2,md:0}}}>
                 Our primary principle is to connect customers with best match
                 packers and movers who can deliver secure and ecnomical shifting
                 services.

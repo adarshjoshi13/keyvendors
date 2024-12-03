@@ -22,17 +22,27 @@ export default function Cta({ services ,city}) {
   
   return (
     <Box sx={{ px: 3, py: 1, background: "#ffebee" }}>
-      <Typography variant="h5" align="center" sx={{ pb: 3 }}>
+      <Typography variant="h5" align="center" sx={{ pb: 3, paddingTop:"20px"}}>
         The Best Cleaning Service Ever!
       </Typography>
       <Typography
         variant="h3"
         align="center"
         color="subPrimary.main"
-        sx={{ pb: 3 }}>
+        sx={{ pb: 3,
+          fontSize: {
+            xs: "1.5rem", 
+            sm: "1.7rem", 
+            md: "2rem", 
+          },
+         }}>
         We Are Certified Company
       </Typography>
-      <Typography variant="h5" align="center" sx={{ pb: 3 }}>
+      <Typography variant="h5" align="center" sx={{ pb: 3, fontSize: {
+            xs: "1.2rem", 
+            sm: "1.4rem", 
+            md: "1.25rem", 
+          }, }}>
         Book Your Home Appliances Cleaning Service
       </Typography>
 
@@ -43,16 +53,24 @@ export default function Cta({ services ,city}) {
       </Box>
       {services && services.length > 0 && (
         <>
-          <Grid justifyContent={"center"} alignItems="center" container>
+          <Grid justifyContent= "center"
+          alignItems="center"
+          spacing={1} 
+          container>
             <Grid item>
               <Typography variant="span" sx={{ p: 2 }}>
                 Popular:
               </Typography>
             </Grid>
             <Grid item>
-            <Grid justifyContent={"center"} alignItems="center" container>
+            <Grid justifyContent={{ xs: "center", md: "center" }} 
+            alignItems="center"
+            spacing={1} 
+            container>
               {services.map((service, index) => (
-                <Grid key={index} item><NavButton href={getServiceUrl(location,service.slug)} >
+                <Grid key={index} item><NavButton href={getServiceUrl(location,service.slug)} sx={{
+                  p: { xs: 2, sm: 2, md: 2 }, 
+                }}>
                   {service.title}
                 </NavButton></Grid>
               ))}

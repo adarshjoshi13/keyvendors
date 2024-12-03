@@ -32,6 +32,7 @@ import { Typography } from "@mui/material";
 import useSWR from "swr";
 import { setNotifications } from "../../store/notificationsSlice";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MainMenuItem({ page, index }) {
   return (
@@ -163,6 +164,7 @@ export default function Header({ megaMenuList }) {
                   sx={{
                     display: "flex",
                     display: { xs: "none", md: "none", lg: "flex" },
+                    
                     mt: 3,
                   }}>
                   {pages.map((page, index) => (
@@ -182,7 +184,9 @@ export default function Header({ megaMenuList }) {
                 justifyContent: "end",
               }}
               item>
-              <Box>
+              <Box sx={{
+                padding:"20px",
+              }}>
                 {notifications && authInfo?.name && notifications.data.data.length > 0 ? (
                   <Badge
                     color="secondary"
@@ -193,7 +197,7 @@ export default function Header({ megaMenuList }) {
                     {/* <NotificationsIcon /> */}
                   </Badge>
                 ) : (
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Box sx={{ display: "flex", alignItems: "center", padding:"20px"}}>
                     {/* <Typography>No Notifications</Typography> */}
                     <NotificationsIcon />
                     {/* <NotificationDialogBox notifications={notifications} /> */}

@@ -53,8 +53,8 @@ export default function ServiceItemDetail({ category, services }) {
   const getItemFromCart = (service) => {
     return cartItemsList[category.cid]
       ? cartItemsList[category.cid].items.filter(
-          (item) => service.sid == item.sid
-        )[0]
+        (item) => service.sid == item.sid
+      )[0]
       : undefined;
   };
 
@@ -98,15 +98,18 @@ export default function ServiceItemDetail({ category, services }) {
                       }}
                       flexWrap></Typography>
                   </Grid>
-                  <Grid
+                  {/* <Grid
                     sx={{ display: "flex" }}
                     justifyContent={"center"}
                     lg={5}
+                    md={12}
+                    sm={12}
+                    xs={12}
                     item>
                     <Stack
-                      direction={{ lg: "row", md: "row" }}
+                      direction={{ lg: "row", md: "row", sm:"row" }}
                       alignItems="start">
-                      <KeyCurrency value={service.cost} />
+                      <KeyCurrency value={service.cost}  />
                       {getItemFromCart(service) ? (
                         <QuantityBox
                           remove={() =>
@@ -134,7 +137,50 @@ export default function ServiceItemDetail({ category, services }) {
                         </Button>
                       )}
                     </Stack>
+                  </Grid> */}
+                  <Grid
+                    container
+                    item
+                    lg={5}
+                    md={12}
+                    sm={12}
+                    xs={12}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Grid item xs="auto">
+                      <KeyCurrency value={service.cost} />
+                    </Grid>
+                    <Grid item xs="auto">
+                      {getItemFromCart(service) ? (
+                        <QuantityBox
+                          remove={() => handleCart(service, category, removeCartItem)}
+                          add={() => handleCart(service, category, addCartItem)}
+                          quantity={getItemFromCart(service).qty}
+                        />
+                      ) : (
+                        <Button
+                          onClick={() => handleCart(service, category, addCartItem)}
+                          variant="outlined"
+                          sx={{
+                            "&::after": {
+                              content: '"+"',
+                              width: "100%",
+                              display: "block",
+                              height: "1rem",
+                              marginTop: "-0.9rem",
+                            },
+                          }}
+                        >
+                          Add
+                        </Button>
+                      )}
+                    </Grid>
                   </Grid>
+
                 </Grid>
               </CardContent>{" "}
               <ExpandMore

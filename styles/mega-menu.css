@@ -73,4 +73,11 @@
     width: 100%;
     height: auto;
   }
+  .pages{
+    width: auto;
+  }
+  .smal-mobile{
+    width: 356px;
+  }
 }
+

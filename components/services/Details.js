@@ -32,7 +32,7 @@ export function Details({
         order={{ lg: 1, md: 1, xs: 2, sm: 2 }}
         item>
         {service.how_it_works && (
-          <Typography sx={{ ml: 3 }} component="div" variant={"h5"}>
+          <Typography sx={{ ml:{ xs: 1, sm: 1, md: 3 }, }} component="div" variant={"h5"}>
             <Box
               sx={{ fontSize: "1rem" }}
               dangerouslySetInnerHTML={{
@@ -41,7 +41,7 @@ export function Details({
             />
           </Typography>
         )}
-        <Box sx={{ mt: 3, p: 2 }}>
+        <Box sx={{ mt: { xs: 0, sm: 0, md: 3 }, p: { xs: 0, sm: 0, md: 2 } }}>
           <Typography variant="body2" align="center" gutterBottom>
             We offer {service.title} services in many areas in{" "}
             {location ? location.locality : "Delhi/NCR"}.
@@ -68,7 +68,7 @@ export function Details({
         <Box>
           <Typography align="center" component="h2" variant="h6">
             {service.header_title?service.header_title:service.title}
-            <Typography component="h3" variant="body2">Select the type of services</Typography>
+            <Typography component="h3" variant="body2"sx={{paddingBottom:2}}>Select the type of services</Typography>
           </Typography>
              
           {((service.parent_cid > 0)||disableTab) ? (
@@ -140,20 +140,20 @@ export function Details({
           <Divider sx={{ my: 2 }} orientation="horizontal" flexItem />
           <Box
             sx={{
-              display: "flex",
+              display: {xs:"",sm:"flex",md:"flex"},
               justifyContent: "space-between",
               padding: "10px",
             }}>
             <Box>
               <Box
                 sx={{
-                  display: "flex",
+                  display: {xs:"flex",sm:"flex",md:"flex"},
                   fontSize: "0.99rem",
                   direction: "row",
                 }}>
                 <TotalAmount invoiceTotal={invoiceTotal} />
               </Box>
-              <Typography>{cartState} Service Selected</Typography>
+              <Typography sx={{paddingBottom:{xs:1,sm:2,md:0}}}>{cartState} Service Selected</Typography>
             </Box>
             <Box>
               <Button

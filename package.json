@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "autosuggest-highlight": "^3.3.4",
     "axios": "^1.2.1",
+    "bootstrap": "^5.3.3",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.1",
     "material-ui-popup-state": "^5.0.4",

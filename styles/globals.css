@@ -340,3 +340,31 @@ span.loader__ball {
 .slick-dots {
   bottom: -15px
 }
+@media screen and (max-width: 600px) {
+
+  .smal-mobile{
+    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .smal-mobile-bale{
+    margin-right: 24px;
+  }
+  .smal-mobile-card{
+    margin-right: 18px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .smal-mobile{
+    width: 356px;
+    margin: 0;
+  }
+  .smal-mobile-bale{
+    margin-right: 24px;
+  }
+  .smal-mobile-card{
+    margin-right: 18px;
+  }
+}

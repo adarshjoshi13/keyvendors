@@ -62,7 +62,7 @@ function ServiceTop({ service, scrollToRef, titleWithLocation }) {
               gutterBottom></Typography>
             <Box
               sx={{
-                pt: 6,
+               p: { xs: 2, sm: 4, md: 6 },
                 pl: 0,
               }}>
               <Button
