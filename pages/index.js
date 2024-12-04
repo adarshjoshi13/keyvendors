@@ -73,7 +73,8 @@ export default function IndexPage({
   blocks,
 }) {
   return (
-    <Layout megaMenuList={services}>
+    <div className="smal-mobile">
+      <Layout megaMenuList={services}>
       <HeroSlider banners={banners} />
       <Cta services={featuredServices} />
       <NotificationRibbon />
@@ -113,5 +114,7 @@ export default function IndexPage({
         </Container>
       )}
     </Layout>
+    </div>
+    
   );
 }
