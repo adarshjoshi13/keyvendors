@@ -19,7 +19,7 @@ export function MetaInfo({ metaInfo }) {
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta name="keyword" content={keyword} />
       <meta name="description" content={description} />
-      {other_meta_tags && <RawHtml html={other_meta_tags}></RawHtml>}
+      {other_meta_tags && <RawHtml html={other_meta_tags} sx={{ bottom: { md: 10 } }}></RawHtml>}
       {setting && <RawHtml html={setting.header_code}></RawHtml>}
       {canonical_url && (
         <link rel="canonical" href={canonical_url} key="canonical" />

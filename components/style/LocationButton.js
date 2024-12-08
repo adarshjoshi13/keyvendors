@@ -21,7 +21,7 @@ export default function LocationButton({ hideButton }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const location = useSelector(getLocation);
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState();
+  const [placement, setPlacement] = useState("bottom-start");
   const locationButtonRef = useRef(null);
   const [cities, setCities] = useState([]);
   const router = useRouter();
@@ -42,11 +42,12 @@ export default function LocationButton({ hideButton }) {
       handleClick("bottom-start");
     }
   };
+
   const handleClick = useCallback(
     (newPlacement = "bottom-start") => {
       setAnchorEl(locationButtonRef.current);
-      setOpen((prev) => placement !== newPlacement || !prev);
       setPlacement(newPlacement);
+      setOpen((prev) => newPlacement !== placement || !prev); // Fix: Directly compare newPlacement
     },
     [placement]
   );
@@ -82,6 +83,7 @@ export default function LocationButton({ hideButton }) {
     },
     [dispatch, handleClick, open]
   );
+
   const selectedCity = useMemo(
     () =>
       resCities
@@ -94,36 +96,34 @@ export default function LocationButton({ hideButton }) {
   );
 
   useEffect(() => {
-    if (!location && router.pathname == "/" && selectedCity.length > 0) {
+    if (!location && router.pathname === "/" && selectedCity.length > 0) {
       dispatch(
         configLocation({ locality: selectedCity[0].title, ...selectedCity[0] })
       );
-      if (!open) {
-        handleClick("bottom-start");
-      }
+      // if (!open) {
+      //   handleClick("bottom-start");
+      // }
     }
   }, [selectedCity]);
 
   useEffect(() => {
-    if (selectedCity.length == 0) {
+    if (selectedCity.length === 0) {
       if (!location) {
         try {
           navigator.permissions
-          .query({ name: "geolocation" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state == "granted") {
-              getCoordinates(handleLocation);
-            } else {
-              if (!open) {
-                handleClick("bottom-start");
+            .query({ name: "geolocation" })
+            .then((permissionStatus) => {
+              if (permissionStatus.state === "granted") {
+                getCoordinates(handleLocation);
+              } else {
+                // if (!open) {
+                //   handleClick("bottom-start");
+                // }
               }
-            }
-          });
+            });
         } catch (error) {
           console.log(error);
         }
-
-
       } else {
         if ((!location.city_id || !location.locality) && resCities) {
           setCities(resCities.data);
@@ -189,7 +189,7 @@ export default function LocationButton({ hideButton }) {
       )}
 
       <DialogBox
-        handleClose={() => setCityDialogOpen(false)}
+        handleClose={() => setCityDialogOpen(true)}
         open={cityDialogOpen}
         title={"Please Select your Service area."}>
         <Grid

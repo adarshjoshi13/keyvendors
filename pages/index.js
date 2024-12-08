@@ -75,7 +75,7 @@ export default function IndexPage({
   return (
     <div className="smal-mobile">
       <Layout megaMenuList={services}>
-      <HeroSlider banners={banners} />
+      <HeroSlider banners={banners} className="pt-0"/>
       <Cta services={featuredServices} />
       <NotificationRibbon />
       {blocks && blocks["data"]["offer"] && (
