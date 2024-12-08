@@ -17,8 +17,8 @@ function HeroSlider({ banners }) {
   const height = "0";
 
   return (
-    <Box sx={{ backgroundColor: "#FFEBEE" }}>
-      <Slider {...settings}>
+    <Box sx={{ backgroundColor: "#FFEBEE"}} >
+      <Slider {...settings} >
         {banners.map((banner, index) => {
           return (
             <Link key={index} href={banner.link?banner.link:"/"}>

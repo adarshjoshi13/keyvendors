@@ -39,9 +39,9 @@ export default function Footer() {
     <>
       <Box sx={{ bgcolor: "secondary.main", p:{ xs: 2, sm: 2, md: 6 }}} component="footer">
         <Grid container spacing={2}>
-          <Grid item lg={1}>
+          {/* <Grid item lg={1}>
             {" "}
-          </Grid>
+          </Grid> */}
           <Grid item lg={4} xs={12}>
             <Item>
               {" "}
@@ -53,9 +53,7 @@ export default function Footer() {
                 packers and movers who can deliver secure and ecnomical shifting
                 services.
               </Typography>
-              <NavigationLink href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none">
-               <ImageWithFallback alt="Play Store" loading="lazy" width="180" height="60" src="https://www.keyvendors.com/public/images/googlePlay.png" />
-              </NavigationLink>
+             
             </Item>
           </Grid>
           <Grid item lg={2} xs={4}>
@@ -120,6 +118,11 @@ export default function Footer() {
                   </NavigationLink>
                 ))}
             </Item>
+          </Grid>
+          <Grid item lg={2} xs={4}>
+          <NavigationLink href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none" sx={{ paddingTop: { md: 7 } }}>
+               <ImageWithFallback alt="Play Store" loading="lazy" width="150" height="50" src="https://www.keyvendors.com/public/images/googlePlay.png" />
+              </NavigationLink>
           </Grid>
         </Grid>
       </Box>

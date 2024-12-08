@@ -17,7 +17,7 @@ function NotificationDialogBox({ notifications }) {
   return (
     <>
       <Badge
-        sx={{ cursor: "pointer" }}
+        sx={{ cursor: "pointer", paddingRight:{xs:"0px"}}}
         onClick={handleOpen}
         className="test"
         color="secondary"
