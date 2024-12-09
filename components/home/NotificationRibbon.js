@@ -12,7 +12,7 @@ export default function NotificationRibbon() {
       className="columnDirection"
       sx={{
         p: 2,
-        mb: 2,
+        mb: 5,
         backgroundColor: (theme) => theme.palette.subPrimary.main,
       }}
       container>

@@ -13,7 +13,7 @@ import ImageWithFallback from "components/style/ImageWithFallback";
 export default function Reviews({ title = "Customer Reviews", list }) {
 
   return (
-    <Box sx={{ paddingBottom : "30px", padding:{xs:"10px",sm:"10px",md:"0px"}}}>
+    <Box sx={{ paddingBottom : "30px", padding:{xs:"10px",sm:"10px",md:"30px"}}}>
       <ShadowTitle title="Our Reviews" />
       <Title title={title} />
       <Grid container spacing={2}>
