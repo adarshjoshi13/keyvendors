@@ -176,6 +176,9 @@ a.slide__next {
   margin-right: 35px;
   margin-top: 0px;
 }
+.css-5c7dew-MuiGrid-root {
+  margin-bottom: 40px;
+}
 @media (max-width:600px) {
 
   .css-1u5i69u-MuiTypography-root {
@@ -184,5 +187,9 @@ a.slide__next {
   }
   .css-9dm300-MuiTypography-root {
     padding: 16px;
+  }
+
+  .css-5c7dew-MuiGrid-root {
+    margin-bottom: 28px;
   }
 }
