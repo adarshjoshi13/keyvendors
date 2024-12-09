@@ -137,7 +137,7 @@ export default function Header({ megaMenuList }) {
 
   return (
     <>
-      <AppBar className="appBar" sx={{ height: "4rem", background: "linear-gradient(25%, black, red 75%)" }}>
+      <AppBar className="appBar" sx={{ height: "4rem" }}>
         <Toolbar>
           <Grid
             sx={{mt:2, pb:2 }}

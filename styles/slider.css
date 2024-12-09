@@ -176,6 +176,11 @@ a.slide__next {
   margin-right: 35px;
   margin-top: 0px;
 }
+
+.appBar {
+  height: 4rem;
+  background: linear-gradient(to right, rgb(248, 247, 247) 10%, red 90%);
+}
 @media (max-width:600px) {
 
   .css-1u5i69u-MuiTypography-root {
