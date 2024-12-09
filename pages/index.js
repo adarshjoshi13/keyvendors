@@ -79,33 +79,95 @@ export default function IndexPage({
       <Cta services={featuredServices} />
       <NotificationRibbon />
       {blocks && blocks["data"]["offer"] && (
-        <Container sx={{ pb: 5 }} maxWidth="lg">
+        <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", }} maxWidth="lg">
           <Media
             title="Our Offers"
             shadowTitle="Our Offers"
             content={blocks["data"]["offer"]["content"]}
+            
           />
         </Container>
       )}
-      <Container sx={{ pb: 5 }} maxWidth="lg">
+      <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", 
+          marginTop:"40px"
+          }} maxWidth="lg">
         <Services services={services} />
       </Container>
       {/* <ServicesStory title="Appliance Repair" services={selectedServices} /> */}
-      <Container sx={{ pb: 5 }} maxWidth="lg">
+      <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", 
+          marginTop:"40px"
+          }} maxWidth="lg">
         <AboutUs content={about.data.teaser} />
       </Container>
-      <Container sx={{ pb: 5 }} maxWidth="lg">
+      <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", 
+          marginTop:"40px"
+          }} maxWidth="lg">
         <WhyUs />
       </Container>
-      <Container sx={{ pb: 5 }} maxWidth="lg">
+      <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", 
+          marginTop:"40px"
+          }} maxWidth="lg">
         <Process services={selectedServices} />
         <TopServices title="Top Services" services={selectedServices} />
       </Container>
-      <Container sx={{ pb: 5 }} maxWidth="lg">
+      <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", 
+          marginTop:"40px"
+          }} maxWidth="lg">
         <Reviews list={testimonials} />
       </Container>
       {blocks && blocks["data"]["media-room"] && (
-        <Container sx={{ pb: 5 }} maxWidth="lg">
+        <Container sx={{ pb: 5, maxWidth: 320,
+          margin: "0 auto",
+          padding: "0.1em",
+          display: "flex",
+          flexDirection: "column",
+          background: "#ffff",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          borderRadius: "15px", 
+          marginTop:"40px"
+          }} maxWidth="lg">
           <Media
             title="Our Media & Awards"
             shadowTitle="Media & Awards"

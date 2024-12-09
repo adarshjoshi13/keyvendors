@@ -27,7 +27,7 @@ export default function TopServices({ title, services }) {
     ],
   };
   return (
-    <Box>
+    <Box sx={{ paddingBottom : "30px"}} className="topservicess">
       {(title && services) && (
         <>
           <ShadowTitle title={title} />

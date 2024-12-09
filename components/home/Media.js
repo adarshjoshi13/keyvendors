@@ -9,9 +9,10 @@ import CardContent from "@mui/material/CardContent";
 import Slider from "react-slick";
 import Carousel from "components/style/Carousel/Carousel";
 import { useEffect, useRef, useState } from "react";
+
 const cards = [1, 2, 3, 4];
 
-export default function Media({ title,shadowTitle,content }) {
+export default function Media({ title, shadowTitle, content }) {
   const contentRef = useRef();
   const [mediaChild, setMediaChild] = useState([]);
   const settings = {
@@ -19,7 +20,7 @@ export default function Media({ title,shadowTitle,content }) {
     slidesToShow: 3,
     slidesToScroll: 3,
     dots: false,
-    arrows: true,
+    arrows: false,
     autoplay: true,
     responsive: [
       {
@@ -33,15 +34,17 @@ export default function Media({ title,shadowTitle,content }) {
       },
     ],
   };
+
   useEffect(() => {
     setMediaChild(Array.from(contentRef.current.children));
   }, []);
+
   return (
     <Box>
       {shadowTitle && <ShadowTitle title={shadowTitle} />}
       {title && <Title title={title} />}
-      <Box>
-        <Slider className="media-slider" {...settings}>
+      <Box sx={{ marginBottom:"90px",}}>
+        <Slider className="media-slider" {...settings} >
           {mediaChild.map((child, index) => (
             <Box key={index}>
               <Card
@@ -53,9 +56,12 @@ export default function Media({ title,shadowTitle,content }) {
                   display: "flex",
                   flexDirection: "column",
                   background: "none",
-                  boxShadow: "none",
-                  borderRadius: "10px",
-                }}>
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Added box-shadow
+                  borderRadius: "15px", // Added border-radius
+
+                 
+                }}
+              >
                 <Box
                   dangerouslySetInnerHTML={{
                     __html: child.outerHTML,
@@ -71,7 +77,8 @@ export default function Media({ title,shadowTitle,content }) {
         ref={contentRef}
         dangerouslySetInnerHTML={{
           __html: content,
-        }}></Box>
+        }}
+      ></Box>
     </Box>
   );
 }

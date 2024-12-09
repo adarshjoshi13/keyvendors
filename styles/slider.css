@@ -168,3 +168,17 @@ a.slide__next {
   background-color: #f1f1f1;
 }
 
+.topservicess .slick-slider .slick-prev{
+  margin-left: 35px;
+}
+
+.topservicess .slick-slider .slick-next{
+  margin-right: 35px;
+  margin-top: 0px;
+}
+@media (max-width:600px) {
+
+.css-hno3a4-MuiContainer-root {
+     max-width: 400px
+}
+}

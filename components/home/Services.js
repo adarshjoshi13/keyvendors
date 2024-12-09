@@ -13,7 +13,7 @@ const location =useLocation();
 
   return (
     <>
-    <Box>
+    <Box sx={{paddingBottom:"40px"}}>
       <ShadowTitle title="Our Services" />
       <Title title="Our Most Used Services" />
       <Grid justifyContent={"center"}container spacing={2}>

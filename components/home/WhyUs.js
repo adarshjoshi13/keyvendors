@@ -13,7 +13,7 @@ import Image from "next/image";
 import  ContentBox  from "components/style/ContentBox";
 export default function WhyUs() {
   return (
-    <ContentBox title="Why Choose Us" shadowTitle="Why Choose Us" >
+    <ContentBox title="Why Choose Us" shadowTitle="Why Choose Us" sx={{ paddingBottom : "30px"}} >
       <Grid container spacing={2}>
         <Grid lg={7} xs={12} item>
           <Box className="columnDirection" sx={{ pb: 3 }}>
