@@ -123,3 +123,48 @@ a.slide__next {
   padding-top: 40px;
   padding-bottom: 24px;
 }
+
+
+/* header color css */
+
+.appBar {
+  height: 4rem;
+  background: linear-gradient(25%, black, red 75%);
+  color: white;
+}
+
+.logo {
+  max-width: 100px;
+}
+
+.menuButton {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  text-transform: none;
+}
+
+.gridContainer {
+  margin-top: 16px;
+  padding-bottom: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notificationBox {
+  padding: 10px;
+}
+
+.iconButton {
+  color: white;
+}
+
+.cartBadge {
+  color: white;
+}
+
+
+.css-pls6ow {
+  background-color: #f1f1f1;
+}
+

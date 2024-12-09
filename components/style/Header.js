@@ -137,10 +137,10 @@ export default function Header({ megaMenuList }) {
 
   return (
     <>
-      <AppBar sx={{ height: "4rem" }}>
+      <AppBar className="appBar" sx={{ height: "4rem", background: "linear-gradient(25%, black, red 75%)" }}>
         <Toolbar>
           <Grid
-            sx={{ mt: 2, pb:2 }}
+            sx={{mt:2, pb:2 }}
             justifyContent={"end"}
             alignContent={"center"}
             alignItems="center"
@@ -165,8 +165,7 @@ export default function Header({ megaMenuList }) {
                     display: "flex",
                     display: { xs: "none", md: "none", lg: "flex" },
                     
-                    mt: 3,
-                  }}>
+                       }}>
                   {pages.map((page, index) => (
                     <MainMenuItem key={index} page={page} index={index} />
                   ))}
@@ -182,7 +181,7 @@ export default function Header({ megaMenuList }) {
                  alignItems: "center",
                 alignContent: "center",
                 justifyContent: { md: "left", xs: "end" },
-                mt: 2, 
+                 
               }}
               item>
               <Box sx={{
