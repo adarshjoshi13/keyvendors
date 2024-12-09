@@ -178,7 +178,11 @@ a.slide__next {
 }
 @media (max-width:600px) {
 
-.css-hno3a4-MuiContainer-root {
-     max-width: 400px
-}
+  .css-1u5i69u-MuiTypography-root {
+    padding-bottom: 6px;
+    padding-top: 14px;
+  }
+  .css-9dm300-MuiTypography-root {
+    padding: 16px;
+  }
 }

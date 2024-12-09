@@ -79,14 +79,14 @@ export default function IndexPage({
       <Cta services={featuredServices} />
       <NotificationRibbon />
       {blocks && blocks["data"]["offer"] && (
-        <Container sx={{ pb: 5, maxWidth: 320,
+        <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",
           flexDirection: "column",
           background: "#ffff",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          borderRadius: "15px", }} maxWidth="lg">
+          borderRadius: "15px"}} maxWidth="lg">
           <Media
             title="Our Offers"
             shadowTitle="Our Offers"
@@ -95,7 +95,7 @@ export default function IndexPage({
           />
         </Container>
       )}
-      <Container sx={{ pb: 5, maxWidth: 320,
+      <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",
@@ -108,7 +108,7 @@ export default function IndexPage({
         <Services services={services} />
       </Container>
       {/* <ServicesStory title="Appliance Repair" services={selectedServices} /> */}
-      <Container sx={{ pb: 5, maxWidth: 320,
+      <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",
@@ -120,7 +120,7 @@ export default function IndexPage({
           }} maxWidth="lg">
         <AboutUs content={about.data.teaser} />
       </Container>
-      <Container sx={{ pb: 5, maxWidth: 320,
+      <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",
@@ -132,7 +132,7 @@ export default function IndexPage({
           }} maxWidth="lg">
         <WhyUs />
       </Container>
-      <Container sx={{ pb: 5, maxWidth: 320,
+      <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",
@@ -145,7 +145,7 @@ export default function IndexPage({
         <Process services={selectedServices} />
         <TopServices title="Top Services" services={selectedServices} />
       </Container>
-      <Container sx={{ pb: 5, maxWidth: 320,
+      <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",
@@ -158,7 +158,7 @@ export default function IndexPage({
         <Reviews list={testimonials} />
       </Container>
       {blocks && blocks["data"]["media-room"] && (
-        <Container sx={{ pb: 5, maxWidth: 320,
+        <Container sx={{ pb: 5, maxWidth: 400,
           margin: "0 auto",
           padding: "0.1em",
           display: "flex",

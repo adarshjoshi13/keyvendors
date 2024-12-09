@@ -43,7 +43,7 @@ export default function Media({ title, shadowTitle, content }) {
     <Box>
       {shadowTitle && <ShadowTitle title={shadowTitle} />}
       {title && <Title title={title} />}
-      <Box sx={{ marginBottom:"90px",}}>
+      <Box sx={{ marginBottom:"50px",}}>
         <Slider className="media-slider" {...settings} >
           {mediaChild.map((child, index) => (
             <Box key={index}>
