@@ -32,6 +32,7 @@ import { Typography } from "@mui/material";
 import useSWR from "swr";
 import { setNotifications } from "../../store/notificationsSlice";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MainMenuItem({ page, index }) {
@@ -146,7 +147,7 @@ export default function Header({ megaMenuList }) {
             alignItems="center"
             direction={"row"}
             container>
-            <Grid lg={3} xs={6} md={11} item>
+            <Grid lg={3} xs={8} md={11} item>
 
               <Link href="/" underline="none" color="inherit">
                 <Image src={logo} width={100} alt="Key Vendors" />

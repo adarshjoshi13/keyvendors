@@ -11,7 +11,7 @@ import RssFeedIcon from '@mui/icons-material/RssFeed';
 import InputIcon from '@mui/icons-material/Input';
 import { SvgIcon } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 // Custom Bale Icon
 function BaleIcon(props) {
   return (
@@ -22,19 +22,14 @@ function BaleIcon(props) {
   );
 }
 export const pagesList = (list,notificationList)=>[
-    { title: "Our Services", menuPopup: true,list:list },
-    { title: "Blog" ,path:"https://keyvendors.com/blogs",icon:<RssFeedIcon />},
-    { title: "Register as a Professional",path:`${process.env.CDN_URL}/partner`,icon:"" },
+    { title: "Our Services", menuPopup: true,list:list, icon:(<><MiscellaneousServicesIcon /></>)},
+    { title: "Blog" ,path:"https://keyvendors.com/blogs",icon:(<><RequestPageIcon /></>)},
+    { title: "Register as a Professional",path:`${process.env.CDN_URL}/partner`,icon:<InputIcon/>},
     {title: "9018181818",path:"tel:9018181818",icon: (
       <>
         <PhoneInTalkIcon />{notificationList}
       </>
     ), },
-    // {icon: (
-    //   <>
-    //     <NotificationsIcon style={{ marginLeft: 8 }} /> {/* Your custom Bale icon */}
-    //   </>
-    // )},
   ];
 
 export const secondMenuList =(isLarge,authToken)=> [

@@ -46,13 +46,13 @@ a {
 
 .primary-btn {
   background-color: #ffe52c;
-  color: #062a44;
+  color: #052d4b;
 }
 
 .ribbon {
   padding: 0.9rem;
   height: 5rem;
-  background: #062a44;
+  background: #052d4b;
   clip-path: polygon(83% 1%, 100% 49%, 84% 100%, 0% 100%, 12% 49%, 0% 0%);
   color: #fff;
   display: flex;
@@ -62,7 +62,7 @@ a {
 }
 
 .active {
-  background-color: #ffe52c !important;
+  background-color: #a38f00  !important;
 }
 
 .rowDirection {

@@ -192,3 +192,11 @@ a.slide__next {
     margin-bottom: 28px;
   }
 }
+
+@media (min-width: 0px) {
+  .css-13vhmzu-MuiPaper-root-MuiDrawer-paper {
+      margin: 0px;
+      top: 62px;
+      border-radius: 0;
+  }
+}
