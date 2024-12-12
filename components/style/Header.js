@@ -40,7 +40,12 @@ function MainMenuItem({ page, index }) {
     <>
       {page.menuPopup ? (
         <MegaMenu
-          buttonValue={page.title}
+          buttonValue={
+            <>
+              {page.icon} 
+              {page.title}
+            </>
+          }
           buttonProp={{
             sx: {
               fontSize: 16,

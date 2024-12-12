@@ -56,9 +56,8 @@ export default function Media({ title, shadowTitle, content }) {
                   display: "flex",
                   flexDirection: "column",
                   background: "none",
-                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Added box-shadow
-                  borderRadius: "15px", // Added border-radius
-
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "15px",
                  
                 }}
               >
