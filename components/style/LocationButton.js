@@ -135,7 +135,7 @@ export default function LocationButton({ hideButton }) {
 
   const LocationGrid = ({ handleLocation, handleClick }) => {
     return (
-      <Grid direction="column" textAlign="center" container>
+      <Grid direction="column" textAlign="center" container sx={{marginLeft:{xs:"0px",sm:"0px"},marginRight:{xs:"0px",sm:"0px"}}}>
         <Grid item>
           <IconContent
             content="Please provide your location for best experience"
