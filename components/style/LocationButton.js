@@ -135,7 +135,7 @@ export default function LocationButton({ hideButton }) {
 
   const LocationGrid = ({ handleLocation, handleClick }) => {
     return (
-      <Grid direction="column" textAlign="center" container sx={{marginLeft:{xs:"0px",sm:"0px"},marginRight:{xs:"0px",sm:"0px"}}}>
+      <Grid direction="column" textAlign="center" container>
         <Grid item>
           <IconContent
             content="Please provide your location for best experience"
@@ -173,7 +173,7 @@ export default function LocationButton({ hideButton }) {
             onClick={() => handleClick("bottom-start")}>
             <Box>{location ? location.locality : "Delhi/NCR"}</Box>
           </Button>
-          <PopperContent open={open} anchorEl={anchorEl} placement={placement}>
+          <PopperContent open={open} anchorEl={anchorEl} placement={placement} sx={{marginLeft:{xs:"0px",sm:"0px"},marginRight:{xs:"0px",sm:"0px"}}}>
             <LocationGrid
               handleLocation={handleLocation}
               handleClick={handleClick}
@@ -182,7 +182,7 @@ export default function LocationButton({ hideButton }) {
         </>
       )}
       {hideButton && (
-        <LocationGrid
+        <LocationGrid sx={{marginLeft:{xs:"0px",sm:"0px"},marginRight:{xs:"0px",sm:"0px"}}}
           handleLocation={handleLocation}
           handleClick={handleClick}
         />
