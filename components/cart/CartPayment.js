@@ -55,13 +55,12 @@ function CartPayment({ cartItemsList }) {
     console.log("object4",Object.keys(cartItemsList).length);
     return acceptedTerms == paymentTerms.length &&
       cartDetail.cartState > 0 &&
-      location&&
       customerDetail.phone &&
       customerDetail.personal &&
       Object.keys(customerDetail.slot).length ===
         Object.keys(cartItemsList).length
-      ? false
-      : true;
+      ? true
+      : false;
   }, [
     acceptedTerms,
     cartDetail,
@@ -71,6 +70,7 @@ function CartPayment({ cartItemsList }) {
     paymentTerms,
   ]);
 
+ 
   const createOrder = async (paymentMethod) => {
     
     let order = {
