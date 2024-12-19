@@ -38,6 +38,8 @@ export default memo(function ServicesMenu({ items, sx }) {
                     display: "flex",
                     alignItems: "center",
                     paddingTop:"10px",
+                    fontWeight:"600",
+                    fontSize:"17px",
                     gap: 1, // Space between the icon and text
                   }}
                 >
@@ -64,7 +66,7 @@ export default memo(function ServicesMenu({ items, sx }) {
                 {item.children.map((child, ind) => (
                   <Box
                     key={ind}
-                    sx={{ fontSize: 12, textTransform: "capitalize" }}
+                    sx={{ fontSize: 12, textTransform: "capitalize", fontSize:"15px" }}
                   >
                     <Link
                       href={getServiceUrl(location, `${item.slug}/${child.slug}`)}

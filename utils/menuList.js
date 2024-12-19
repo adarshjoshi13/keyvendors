@@ -13,6 +13,8 @@ import { SvgIcon } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import EngineeringIcon from '@mui/icons-material/Engineering';
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+
 // Custom Bale Icon
 function BaleIcon(props) {
   return (
@@ -26,11 +28,16 @@ export const pagesList = (list,notificationList)=>[
     { title: "Professional Register",path:`${process.env.CDN_URL}/partner`,icon:<EngineeringIcon/>},
     { title: "Our Services", menuPopup: true,list:list, icon:(<><MiscellaneousServicesIcon /></>)},
     { title: "Blog" ,path:"https://keyvendors.com/blogs",icon:(<><RssFeedIcon /></>)},
+  { title: "Register as a Professional",path:`${process.env.CDN_URL}/partner`,icon:<AcUnitIcon/>},
+    { title: "Our Services", menuPopup: true,list:list, icon:(<><MiscellaneousServicesIcon /></>)},
+    { title: "Blog" ,path:"https://keyvendors.com/blogs",icon:(<><RequestPageIcon /></>)},
+    
     {title: "9018181818",path:"tel:9018181818",icon: (
       <>
         <PhoneInTalkIcon />{notificationList}
       </>
     ), },
+    
   ];
 
 export const secondMenuList =(isLarge,authToken)=> [
