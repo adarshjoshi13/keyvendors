@@ -152,19 +152,20 @@ export default function Header({ megaMenuList }) {
             alignItems="center"
             direction={"row"}
             container>
-            <Grid lg={3} xs={8} md={11} item>
-
+            <Grid lg={1} xs={8} md={11} item>
               <Link href="/" underline="none" color="inherit">
-                <Image src={logo} width={100} alt="Key Vendors" />
-              </Link>
-
+                  <Image src={logo} width={100} alt="Key Vendors" />
+                </Link>
             </Grid>
             {isLarge && (
               <Grid
-                lg={6}
+                lg={8}
                 xs={0}
                 md={0}
-                sx={{ display: { xs: "none", md: "none", lg: "flex" },justifyContent: "end", }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
                 item>
                 <Box
                   sx={{
