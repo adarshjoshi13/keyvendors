@@ -23,8 +23,8 @@ export default memo(function ServicesMenu({ items, sx }) {
           (item, index) =>
             item.children.length > 0 && (
               <Grid
-                lg={4}
-                md={4}
+                lg={3}
+                md={3}
                 xs={6}
                 key={index}
                 order={item.children.length}
@@ -40,7 +40,9 @@ export default memo(function ServicesMenu({ items, sx }) {
                     paddingTop:"10px",
                     fontWeight:"600",
                     fontSize:"17px",
-                    gap: 1, // Space between the icon and text
+                    gap: 1, 
+                     padding: "2px",
+                    textDecoration: "underline",
                   }}
                 >
                   {item.icon && (
@@ -51,6 +53,7 @@ export default memo(function ServicesMenu({ items, sx }) {
                         width: "20px",
                         height: "20px",
                         objectFit: "contain",
+                        textDecoration: "underline",
                       }}
                     />
                   )}

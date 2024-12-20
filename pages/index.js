@@ -150,7 +150,7 @@ export default function IndexPage({
           padding: "0.1em",
           display: "flex",
           flexDirection: "column",
-          background: "#ffff",
+          background: "#fbfbfb",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           borderRadius: "15px", 
           marginTop:"40px"

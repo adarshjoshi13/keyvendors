@@ -22,10 +22,15 @@ function BaleIcon(props) {
     </SvgIcon>
   );
 }
+
+// https://keyvendors.com
+
+// ${process.env.CDN_URL}/partner
+
 export const pagesList = (list,notificationList)=>[
-    { title: "Professional Register",path:`${process.env.CDN_URL}/partner`,icon:<EngineeringIcon/>},
+    { title: "Professional Register",path:`/partner`,icon:<EngineeringIcon/>},
     { title: "Our Services", menuPopup: true,list:list, icon:(<><MiscellaneousServicesIcon /></>)},
-    { title: "Blog" ,path:"https://keyvendors.com/blogs",icon:(<><RssFeedIcon /></>)},
+    { title: "Blog" ,path:"/blogs",icon:(<><RssFeedIcon /></>)},
     {title: "9018181818",path:"tel:9018181818",icon: (
       <>
         <PhoneInTalkIcon />{notificationList}

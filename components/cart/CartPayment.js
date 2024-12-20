@@ -64,7 +64,7 @@ function CartPayment({ cartItemsList }) {
   }, [
     acceptedTerms,
     cartDetail,
-    location,
+    location?"noida sector 62":"noida",
     customerDetail,
     cartItemsList,
     paymentTerms,
