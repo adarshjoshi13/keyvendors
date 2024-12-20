@@ -50,13 +50,17 @@ export default function Reviews({ title = "Customer Reviews", list }) {
                   color="red"
                   sx={{
                     "& .MuiSvgIcon-root": {
-                      color: "blue",
+                      color: "Yellow",
                     }                   
                   }}
                   readOnly
                 />
                 <Typography component={"div"} noWrap>{card.created_at}</Typography>
-                <Typography component={"div"} sx={{ fontSize: 14 }} >
+                <Typography component={"div"} sx={{ fontSize: 14 ,  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",}} >
                   {card.body}
                 </Typography>
               </CardContent>
