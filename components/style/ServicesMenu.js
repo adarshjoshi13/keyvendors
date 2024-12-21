@@ -8,6 +8,7 @@ import { validateConfig } from "next/dist/server/config-shared";
 
 export default memo(function ServicesMenu({ items, sx }) {
   const location = useLocation();
+  let customId = 0;
   return (
     <Grid
     id="services-menu-wrapper"
@@ -20,9 +21,12 @@ export default memo(function ServicesMenu({ items, sx }) {
   >
     {items &&
       items.map((item, index) =>
+        
         item.children.length > 0 ? (
+          customId += 1,
+         
           <Grid
-            id={`menu${index}`}
+            id={`menu${customId}`}
             lg={3}
             md={3}
             sm={6}
@@ -31,7 +35,7 @@ export default memo(function ServicesMenu({ items, sx }) {
             item
             sx={{
               padding: "16px",
-              backgroundColor: index % 2 === 0 ? "#ededed" : "#ffff",
+              backgroundColor: customId  % 2 === 1 ? "#ededed" : "#ffff",
             }}
           >
             <Box
