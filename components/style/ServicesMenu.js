@@ -10,79 +10,84 @@ export default memo(function ServicesMenu({ items, sx }) {
   const location = useLocation();
   return (
     <Grid
-      sx={{ m: 2, maxHeight: "20rem", width: "100%", ...sx }}
-      justifyContent="start"
-      direction="row"
-      alignItems="start"
-      alignContent="start"
-      flexWrap
-      container
-    >
-      {items &&
-        items.map(
-          (item, index) =>
-            item.children.length > 0 && (
-              <Grid
-                lg={3}
-                md={3}
-                xs={6}
-                key={index}
-                order={item.children.length}
-                item
+    id="services-menu-wrapper"
+    sx={{
+      m: 2,
+      width: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+    }}
+  >
+    {items &&
+      items.map((item, index) =>
+        item.children.length > 0 ? (
+          <Grid
+            id={`menu${index}`}
+            lg={3}
+            md={3}
+            sm={6}
+            xs={12}
+            key={index}
+            item
+            sx={{
+              padding: "16px",
+              backgroundColor: index % 2 === 0 ? "#ededed" : "#ffff",
+            }}
+          >
+            <Box
+              sx={{
+                mb: 2,
+                fontSize: "18px",
+                fontWeight: "bold",
+                textTransform: "capitalize",
+                textDecoration: "underline",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                color: "red",
+              }}
+            >
+              {item.icon && (
+                <img
+                  src={item.icon}
+                  alt={`${item.title} icon`}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    objectFit: "contain",
+                  }}
+                />
+              )}
+              {item.title}
+            </Box>
+  
+            {/* Child Items */}
+            {item.children.map((child, ind) => (
+              <Box
+                key={ind}
+                sx={{
+                  fontSize: "14px",
+                  marginBottom: "8px", 
+                  lineHeight: 1.5,
+                }}
               >
-                <Box
+                <Link
+                  href={getServiceUrl(location, `${item.slug}/${child.slug}`)}
+                  underline="none"
+                  color="#000"
                   sx={{
-                    mb: 0.5,
-                    fontSize: 14,
-                    textTransform: "capitalize",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingTop:"10px",
-                    fontWeight:"600",
-                    fontSize:"17px",
-                    gap: 1, 
-                     padding: "2px",
-                    textDecoration: "underline",
+                    "&:hover": {
+                      color: "#007BFF",
+                    },
                   }}
                 >
-                  {item.icon && (
-                    <img
-                      src={item.icon}
-                      alt={`${item.title} icon`}
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        objectFit: "contain",
-                        textDecoration: "underline",
-                      }}
-                    />
-                  )}
-                  <Link
-                    {...(item.isClick
-                      ? { onClick: item.method }
-                      : { href: `/service/${location.slug}/${item.slug}` })}
-                    underline="none"
-                  >
-                    {item.title}
-                  </Link>
-                </Box>
-                {item.children.map((child, ind) => (
-                  <Box
-                    key={ind}
-                    sx={{ fontSize: 12, textTransform: "capitalize", fontSize:"15px" }}
-                  >
-                    <Link
-                      href={getServiceUrl(location, `${item.slug}/${child.slug}`)}
-                      underline="none"
-                      color="#000000"
-                    >
-                      {child.title}
-                    </Link>
-                  </Box>
-                ))}
-              </Grid>
-            )
-        )}
-    </Grid>
+                  {child.title}
+                </Link>
+              </Box>
+            ))}
+          </Grid>
+        ) : null
+      )}
+  </Grid>
   );
 });
