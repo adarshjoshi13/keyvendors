@@ -40,7 +40,7 @@ export default function StaticPage({ page, title }) {
     <Layout sx={{ pb: 0 }}>
       <HeroHeader title={page ? page.title : title} />
       <Box
-        sx={{ px:{ xs: 2, sm: 5, md: '100px' }}}
+        sx={{ px:{ xs: 2, sm: 5, md: '150px' }}}
         
         dangerouslySetInnerHTML={{
           __html: page ? page.body : "Coming Soon",
