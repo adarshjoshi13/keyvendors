@@ -6,8 +6,8 @@
 .pnp
 .env
 
-env.production
-env.development
+.env.production
+.env.development
 
 # testing
 /coverage
