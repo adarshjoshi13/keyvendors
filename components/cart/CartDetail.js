@@ -51,7 +51,7 @@ function CartDetail() {
           </CartAccordion>
         }>
         <VerifyNumber />
-        {(!location || !location.city_id) && <VerifyLocation />}
+        <VerifyLocation />
         <CartPersonalDetail />
         <CartSlot cartItemsList={cartItemsList} />
         <CartPayment

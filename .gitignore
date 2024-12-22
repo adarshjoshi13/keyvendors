@@ -7,7 +7,7 @@
 .env
 
 env.production
-.env.development
+env.development
 
 # testing
 /coverage
