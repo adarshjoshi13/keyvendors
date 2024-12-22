@@ -28,7 +28,7 @@ const VerifyNumber = React.memo(function VerifyNumberC(props) {
   const sendOtp = async () => {
     if (mobile.length == 10) {
       try {
-        let res = await postData("otp/send", { phone: mobile });
+        let res = await postData("otpverify/send", { phone: mobile });
         setDisableOtp(false);
         startTimer();
       } catch (error) {
