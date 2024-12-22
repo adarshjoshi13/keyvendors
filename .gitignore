@@ -6,7 +6,7 @@
 .pnp
 .env
 
-.env.production
+env.production
 .env.development
 
 # testing
