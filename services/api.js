@@ -126,8 +126,31 @@ export const fetchDataWithUrl = async (url, reqData={}) => {
   }
 };
 
-
 export const fetchNotificationsSMG = async (url, reqData,opt) => {
+  try {
+    let options =opt?opt: {};
+
+    if (reqData) {
+      options["params"] = {
+        ...reqData,
+      };
+    }
+    const res = await axios.get(`${process.env.API_URL}/${url}`);
+    return res.data;
+  } catch (error) {
+    if (error.response) {
+      console.error(
+        "Error:" + error.response.status + "::" + error.response.statusText
+      );
+      return { statusCode: error.response.status, error: error.response.data };
+    } else {
+      console.error(error);
+      return { statusCode: 400, error: "bad request" };
+    }
+  }
+};
+
+export const fetchPeymantOptions = async (url, reqData,opt) => {
   try {
     let options =opt?opt: {};
 
