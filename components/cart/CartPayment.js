@@ -105,10 +105,10 @@ function CartPayment({ cartItemsList }) {
         window.location.href = `/order/confirm/${result.data.transaction_id}`;
       }else{
         dispatch(clearCart());
-        if (!authToken && result.data.orderRes.user) {
-          dispatch(login(result.data.orderRes.user));
-        } else if (authToken && !authInfo.address && result.data.orderRes.user) {
-          dispatch(updateInfo(result.data.orderRes.user.info));
+        if (!authToken && result.data.orderRes?.user) {
+          dispatch(login(result.data.orderRes?.user));
+        } else if (authToken && !authInfo.address && result.data.orderRes?.user) {
+          dispatch(updateInfo(result.data.orderRes?.user.info));
         }
 
         if (paymentMethod === "online") {
@@ -123,11 +123,11 @@ function CartPayment({ cartItemsList }) {
             lastname: "",
             phone: orderRes?.user?.info?.phone,
             hash,
-            surl: `${process.env.HOST}/order/confirm/${orderRes.transaction_id}`,
-            furl: `${process.env.HOST}/order/confirm/${orderRes.transaction_id}`,
+            surl: `${process.env.HOST}/order/confirm/${orderRes?.transaction_id}`,
+            furl: `${process.env.HOST}/order/confirm/${orderRes?.transaction_id}`,
           }));
         } else {
-          window.location.href = `/order/confirm/${result.data.orderRes.transaction_id}`;
+          window.location.href = `/order/confirm/${result.data.orderRes?.transaction_id}`;
         }
       }
     // } catch (error) {

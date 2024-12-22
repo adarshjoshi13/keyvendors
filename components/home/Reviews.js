@@ -50,7 +50,7 @@ export default function Reviews({ title = "Customer Reviews", list }) {
                   color="red"
                   sx={{
                     "& .MuiSvgIcon-root": {
-                      color: "Yellow",
+                      color: "#ed3208",
                     }                   
                   }}
                   readOnly
