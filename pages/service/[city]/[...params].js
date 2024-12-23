@@ -59,7 +59,7 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-export default function ServicesPage({ service, selectedService }) {
+export default function ServicesPage({ service, metaInfo,selectedService }) {
   const detailRef = useRef(null);
   return (
     <Layout>
@@ -67,6 +67,7 @@ export default function ServicesPage({ service, selectedService }) {
         <ServiceTop
           service={service}
           scrollToRef={detailRef}
+          metaInfo={metaInfo}
           titleWithLocation={true}
         />
         <ServiceDetail

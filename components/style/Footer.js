@@ -46,7 +46,7 @@ export default function Footer() {
             <Item>
               {" "}
               <Typography variant="h6" align="left" gutterBottom>
-                Key Vendors India Pvt.Ltd.
+                Keyvendors India Pvt.Ltd.
               </Typography>
               <Typography variant="caption" align="left" component="p" sx={{paddingBottom:{xs:2,sm:2,md:0}}}>
                 Our primary principle is to connect customers with best match

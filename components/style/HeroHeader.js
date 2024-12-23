@@ -1,6 +1,6 @@
 import React from "react";
 import {Box,Typography} from "@mui/material";
-import aboutUs from "public/assets/images/aboutus.webp";
+import aboutUs from "public/assets/images/aboutusimage.png";
 import Image from "next/image";
 
 export function HeroHeader({ title, sx }) {
