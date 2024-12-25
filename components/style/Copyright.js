@@ -12,7 +12,7 @@ export default function Copyright() {
   return (
     <Typography variant="caption" color="textSecondary" align="center">
       <CopyrightText>
-        {"Copyright © "} Key Vendors India Pvt.Ltd. {new Date().getFullYear()}
+        {"Copyright © "} Keyvendors India Pvt.Ltd. {new Date().getFullYear()}
       </CopyrightText>{" "}
     </Typography>
   );
