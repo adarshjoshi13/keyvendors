@@ -70,6 +70,7 @@ export default memo(function ServicesMenu({ items, sx }) {
                       fontSize: "14px",
                       marginBottom: "8px",
                       lineHeight: 1.5,
+                      
                     }}
                   >
                     <Link
