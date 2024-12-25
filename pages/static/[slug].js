@@ -5,6 +5,8 @@ import { fetchData } from "services/api";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import about from "public/assets/images/about.png";
+import aboutRepaire from "public/assets/images/aboutRepaire.jpeg";
+import aboutRepaireac from "public/assets/images/aboutRepaireac.jpeg";
 import Image from "next/image";
 
 export const getStaticPaths = async () => {
@@ -49,7 +51,7 @@ const highlightText = (text, wordsToHighlight) => {
 const splitContentIntoSections = (body, phrases) => {
   const sections = [];
   let lastIndex = 0;
-
+  const images = [about, aboutRepaire, aboutRepaireac];
   phrases.forEach((phrase, index) => {
     const phraseIndex = body.indexOf(phrase, lastIndex);
     if (phraseIndex !== -1) {
@@ -70,7 +72,7 @@ const splitContentIntoSections = (body, phrases) => {
       sections.push({
         title: phrase,
         content,
-        image: about, // Attach image if available
+        image: images[index % images.length],
       });
       lastIndex = nextPhraseIndex;
     }
@@ -107,14 +109,15 @@ export default function StaticPage({ page, title }) {
 
   return (
     <Layout>
-      <HeroHeader title={page ? page.title : title} />
-      <Grid container spacing={4} sx={{ px:2}}>
-        {sections.length > 0
-          ? sections.map((section, index) => (
-              <React.Fragment key={index}>
-                {/* First the Image */}
+  <HeroHeader title={page ? page.title : title} />
+  <Grid container spacing={4} sx={{ px: 15 }}>
+    {sections.length > 0
+      ? sections.map((section, index) => (
+          <React.Fragment key={index}>
+            {index % 2 ===1 ? (
+              <>
                 <Grid item xs={12} md={6}>
-                  {section.title && <h3 style={{ textAlign: "end" }}>{section.title}</h3>}
+                  {section.title && <h3 style={{ textAlign: "end", paddingRight: "18px"}}>{section.title}</h3>}
                   {section.image && (
                     <Box>
                       <Image
@@ -124,12 +127,13 @@ export default function StaticPage({ page, title }) {
                           width: "100%",
                           height: "auto",
                           marginBottom: "1rem",
+                          padding: "18px",
+                          borderRadius:"30px"
                         }}
                       />
                     </Box>
                   )}
                 </Grid>
-                {/* Then the Content */}
                 <Grid item xs={12} md={6}>
                   <Box
                     dangerouslySetInnerHTML={{
@@ -141,10 +145,45 @@ export default function StaticPage({ page, title }) {
                     sx={{ textAlign: "justify", lineHeight: "2" }}
                   />
                 </Grid>
-              </React.Fragment>
-            ))
-          : "Content Coming Soon"}
-      </Grid>
-    </Layout>
+              </>
+            ) : (
+              <>
+                <Grid item xs={12} md={6}>
+                  <Box
+                    dangerouslySetInnerHTML={{
+                      __html: highlightText(
+                        section.content,
+                        wordsToHighlight
+                      ),
+                    }}
+                    sx={{ textAlign: "justify", lineHeight: "2" }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  {section.title && <h3 style={{ textAlign: "end",paddingRight: "18px" }}>{section.title}</h3>}
+                  {section.image && (
+                    <Box>
+                      <Image
+                        src={section.image}
+                        alt={section.title || "Section Image"}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          marginBottom: "1rem",
+                          padding: "18px",
+                          borderRadius:"30px"
+                        }}
+                      />
+                    </Box>
+                  )}
+                </Grid>
+              </>
+            )}
+          </React.Fragment>
+        ))
+      : "Content Coming Soon"}
+  </Grid>
+</Layout>
+
   );
 }

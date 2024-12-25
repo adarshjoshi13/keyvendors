@@ -323,6 +323,7 @@ span.loader__ball {
   .loader__ball--2 {
     animation-delay: -0.2s;
   }
+  
 
   @keyframes bulging {
     0%,

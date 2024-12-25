@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
 export default function ContactUsPage() {
   return (
     <Layout sx={{ pb: 0 }}>
-      <HeroHeader title="Contact Us" />
+      <HeroHeader title="Contact Us" sx={{marginTop:"-16px"}} />
       <ContactUs />
     </Layout>
   );
