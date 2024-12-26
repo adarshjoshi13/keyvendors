@@ -33,6 +33,8 @@ import useSWR from "swr";
 import { setNotifications } from "../../store/notificationsSlice";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+import ImageWithFallback from "./ImageWithFallback";
+import { styled } from "@mui/material/styles";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MainMenuItem({ page, index }) {
@@ -141,6 +143,16 @@ export default function Header({ megaMenuList }) {
     }
   }, [megaMenuList, pages, dispatch, savedServices]);
 
+
+  const NavigationLink = styled(Link)(({ theme }) => ({
+    background: "transparent",
+    cursor: "pointer",
+    ...theme.typography.caption,
+    color: theme.palette.primary.main,
+    display: "block",
+    fontStyle: "normal",
+  }));
+
   return (
     <>
       <AppBar className="appBar" sx={{ height: "4rem" }}>
@@ -159,7 +171,7 @@ export default function Header({ megaMenuList }) {
             </Grid>
             {isLarge && (
               <Grid
-                lg={8}
+                lg={7}
                 xs={0}
                 md={0}
                 sx={{
@@ -179,9 +191,10 @@ export default function Header({ megaMenuList }) {
                 </Box>
               </Grid>
             )}
+           
             <Grid
-              lg={3}
-              md={1}
+              lg={4}
+              md={2}
               xs={4}
               sx={{
                  display: "flex",
@@ -191,9 +204,15 @@ export default function Header({ megaMenuList }) {
                  
               }}
               item>
+              <Box >
+                <NavigationLink href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none">
+                  <ImageWithFallback alt="Play Store" loading="lazy" width="150" height="50" src="https://www.keyvendors.com/public/images/googlePlay.png" />
+                </NavigationLink>
+              </Box>
               <Box sx={{
                 padding:"10px",
               }}>
+                 
                 {notifications && authInfo?.name && notifications.data.data.length > 0 ? (
                   <Badge
                     color="secondary"
@@ -210,6 +229,7 @@ export default function Header({ megaMenuList }) {
                     {/* <NotificationDialogBox notifications={notifications} /> */}
                   </Box>
                 )}
+
               </Box>
 
               {isLarge && (
