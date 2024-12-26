@@ -58,7 +58,7 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
         ref={refProp}
         component={"section"}
         sx={{
-          "&::before": { lg: beforePrp, md: beforePrp },
+          // "&::before": { lg: beforePrp, md: beforePrp },
         }}>
         {isMobile ? (
           <Details
@@ -75,17 +75,37 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
               sx={{
                 position: "relative",
                 mx: "1.5rem",
-                mt: "-20rem",
+                // mt: "1rem",
                 p: 2,
               }}
-              >
-              <Tabs value={tabIndex} onChange={handleTabChange} variant="fullWidth">
+            >
+              <Details
+                // sx={{ mt: 3 }}
+                service={service}
+                value={value}
+                handleChange={handleChange}
+                invoiceTotal={invoiceTotal}
+                cartState={cartState}
+                disableTab={disableTab}
+              />
+            </Paper>
+            <Paper
+              sx={{
+                position: "relative",
+                mx: "1.5rem",
+                mt: "1rem",
+                p: 2,
+                // pt: 5
+              }}
+              elevation={1}>
+             <Tabs value={tabIndex} onChange={handleTabChange} variant="fullWidth">
                 <Tab label="Why Us ?" />
                 <Tab label="How it Works" />
                 <Tab label="Customer Reviews" />
+                <Tab label="Blog" href="/blogs/"/>
               </Tabs>
               <TabPanel value={tabIndex} index={0}>
-                <Typography variant="h4" gutterBottom sx={{fontSize:"22px",paddingBottom: "2%"}}>
+                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
                   Why Key Vendors?
                   <hr></hr>
                 </Typography>
@@ -121,7 +141,7 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                 </Typography>
               </TabPanel>
               <TabPanel value={tabIndex} index={1}>
-                <Typography variant="h4" gutterBottom sx={{fontSize:"22px",paddingBottom: "2%"}}>
+                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
                   How it Works?
                   <hr></hr>
                 </Typography>
@@ -151,12 +171,11 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                   Keyvendors values customer feedback, and so they will ask for feedback from customers to ensure that they are satisfied with the services provided.
                 </Typography>
               </TabPanel>
-
               <TabPanel value={tabIndex} index={2}>
-                <Typography variant="h4" gutterBottom sx={{fontSize:"22px",paddingBottom: "2%"}}>
+                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
                   Customer Reviews
                 </Typography>
-                <Typography paragraph sx={{color: "#646464"}}>
+                <Typography paragraph sx={{ color: "#646464" }}>
                   of AC service in Ghaziabad Professionals in New, Ghaziabad
                 </Typography>
                 <Box component="form" noValidate autoComplete="off" sx={{ mt: 3 }}>
@@ -216,25 +235,6 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                   </button>
                 </Box>
               </TabPanel>
-              </Paper>
-              <Paper
-              sx={{
-                position: "relative",
-                mx: "1.5rem",
-                mt: "2rem",
-                p: 2,
-                pt:5
-              }}
-              elevation={1}>
-              <Details
-              sx={{ mt: 3 }}
-                  service={service}
-                  value={value}
-                  handleChange={handleChange}
-                  invoiceTotal={invoiceTotal}
-                  cartState={cartState}
-                  disableTab={disableTab}
-                />
             </Paper>
           </>
         )}

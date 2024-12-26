@@ -4,9 +4,30 @@ import completedIcon from "public/assets/completedIcon.png";
 import requestIcon from "public/assets/requestIcon.png";
 import satisfiedIcon from "public/assets/satisfiedIcon.png";
 import customersIcon from "public/assets/customersIcon.png";
+import {fetchOrderSummary} from "services/api";
 import Image from "next/image";
 import Box from "@mui/material/Box";
+import { useState, useEffect } from "react";
+
 export default function NotificationRibbon() {
+  const [orderSummar, setOrderSummar] = useState([]);
+  const fetchOrderSummarys = async () => {
+    try {
+      const response = await fetchOrderSummary(`ordersummary`);
+      if (response.status === 200 && response.data) {
+        setOrderSummar(response.data);
+        console.log("Payment Options:", response.data);
+      } else {
+        console.error("Failed to fetch payment options:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching payment options:", error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchOrderSummarys();
+  }, []);
   return (
     <Grid
       className="columnDirection"
@@ -27,7 +48,7 @@ export default function NotificationRibbon() {
           <Image src={completedIcon} alt="Why Choose Us" />
         </Box>
         <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">90,000</Typography>
+          <Typography variant="h6">{orderSummar.completed_jobs}</Typography>
           <Typography variant="body">Completed Jobs</Typography>
         </Box>
       </Grid>
@@ -42,7 +63,7 @@ export default function NotificationRibbon() {
           <Image src={satisfiedIcon} alt="Why Choose Us" />
         </Box>
         <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">65,000</Typography>
+          <Typography variant="h6">{orderSummar.satisfied_customers}</Typography>
           <Typography variant="body">Satisfied Customers</Typography>
         </Box>
       </Grid>
@@ -57,7 +78,7 @@ export default function NotificationRibbon() {
           <Image src={requestIcon} alt="Why Choose Us" />
         </Box>
         <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">4,700</Typography>
+          <Typography variant="h6">{orderSummar.monthly_job_requests}</Typography>
           <Typography variant="body">Monthly Job Requests</Typography>
         </Box>
       </Grid>
@@ -72,7 +93,7 @@ export default function NotificationRibbon() {
           <Image src={customersIcon} alt="Why Choose Us" />
         </Box>
         <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">35,000</Typography>
+          <Typography variant="h6">{orderSummar.repeat_customers}</Typography>
           <Typography variant="body">Repeat Cutomers</Typography>
         </Box>
       </Grid>

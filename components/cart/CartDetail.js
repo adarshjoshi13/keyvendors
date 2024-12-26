@@ -50,7 +50,7 @@ function CartDetail() {
             <Loader />
           </CartAccordion>
         }>
-        <VerifyNumber />
+        {/* <VerifyNumber /> */}
         <VerifyLocation />
         <CartPersonalDetail />
         <CartSlot cartItemsList={cartItemsList} />
