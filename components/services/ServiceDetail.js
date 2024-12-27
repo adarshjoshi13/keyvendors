@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Tabs from "@mui/material/Tabs";
@@ -22,7 +22,7 @@ function TabPanel({ children, value, index }) {
   );
 }
 
-function ServiceDetail({ service, selectedService, refProp, showContent, disableTab }) {
+function ServiceDetail({ service, selectedService, refProp, showContent, disableTab  }) {
   const cartState = useSelector(selectCartState);
   const invoiceTotal = useSelector(cartGrandTotal);
   const selectedSrv = selectedService
@@ -31,7 +31,8 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
     ? service.children[0].slug
     : 0;
   const [value, setValue] = React.useState(selectedSrv);
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const [tabIndex, setTabIndex] = React.useState(4);
+  const [isReviewFormVisible, setReviewFormVisible] = useState(false);
 
   const isMobile = useIsMobile();
 
@@ -41,6 +42,9 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
 
   const handleTabChange = (_event, newValue) => {
     setTabIndex(newValue);
+  };
+  const toggleReviewForm = () => {
+    setReviewFormVisible((prev) => !prev);
   };
 
   const beforePrp = {
@@ -98,18 +102,17 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                 // pt: 5
               }}
               elevation={1}>
-                <div style={{textAlign:"center"}}>
                   <Tabs value={tabIndex} onChange={handleTabChange} variant="fullWidth" sx={{marginBottom:"10px"}}>
                     <Tab label="Why Us ?" />
                     <Tab label="How it Works" />
                     <Tab label="Customer Reviews" />
                     <Tab label="Blog" href="/blogs/"/>
+                    <Tab label="About ac service in ghaziabad in new" />
                   </Tabs>
-                  <span style={{ color: "#646464" }}>About ac service in ghaziabad in new</span>
-                </div>
+                  
              
               <TabPanel value={tabIndex} index={0}>
-                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
+                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px !important", paddingBottom: "2%" }}>
                   Why Key Vendors?
                   <hr></hr>
                 </Typography>
@@ -145,7 +148,7 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                 </Typography>
               </TabPanel>
               <TabPanel value={tabIndex} index={1}>
-                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
+                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px !important", paddingBottom: "2%" }}>
                   How it Works?
                   <hr></hr>
                 </Typography>
@@ -176,68 +179,82 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                 </Typography>
               </TabPanel>
               <TabPanel value={tabIndex} index={2}>
-                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
-                  Customer Reviews
-                </Typography>
-                <Typography paragraph sx={{ color: "#646464" }}>
-                  of AC service in Ghaziabad Professionals in New, Ghaziabad
-                </Typography>
-                <Box component="form" noValidate autoComplete="off" sx={{ mt: 3 }}>
-                  <Typography variant="h6" gutterBottom>
-                    WRITE YOUR REVIEW
-                  </Typography>
-                  <Box sx={{ mb: 2 }}>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      style={{
-                        width: "100%",
-                        padding: "10px",
-                        marginBottom: "10px",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                      }}
-                    />
-                    <textarea
-                      placeholder="Your review"
-                      rows={4}
-                      style={{
-                        width: "100%",
-                        padding: "10px",
-                        marginBottom: "10px",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                      }}
-                    />
-                  </Box>
-                  <Typography gutterBottom>Your Rating:</Typography>
-                  <Box sx={{ display: "flex", gap: "5px", mb: 3 }}>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <span
-                        key={index}
-                        style={{
-                          fontSize: "1.5rem",
-                          cursor: "pointer",
-                        }}
-                      >
-                        ☆
-                      </span>
-                    ))}
-                  </Box>
-                  <button
-                    type="submit"
-                    style={{
-                      padding: "10px 20px",
-                      backgroundColor: "black",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Submit
-                  </button>
+              <Typography variant="h4" gutterBottom sx={{ fontSize: "22px !important"}}>
+                Customer Reviews
+              </Typography>
+              <Box sx={{ color: "#646464", fontSize:"16px" }}>
+                  of AC service in Ghaziabad Professionals in new, Ghaziabad
                 </Box>
+                <hr></hr>
+              <Typography
+                  variant="h4"
+                  gutterBottom
+                  onClick={toggleReviewForm}
+                  sx={{ cursor: "pointer", fontSize:"22px !important", paddingBottom: "2%",paddingTop: "2%"}}
+                >
+                  WRITE YOUR REVIEW
+                </Typography>
+                {isReviewFormVisible && (
+                  <Box component="form" noValidate autoComplete="off" sx={{ mt: 3 }}>
+                    <Box sx={{ mb: 2 }}>
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        style={{
+                          width: "100%",
+                          padding: "10px",
+                          marginBottom: "10px",
+                          border: "1px solid #ccc",
+                          borderRadius: "4px",
+                        }}
+                      />
+                      <textarea
+                        placeholder="Your review"
+                        rows={4}
+                        style={{
+                          width: "100%",
+                          padding: "10px",
+                          marginBottom: "10px",
+                          border: "1px solid #ccc",
+                          borderRadius: "4px",
+                        }}
+                      />
+                    </Box>
+                    <Typography gutterBottom>Your Rating:</Typography>
+                    <Box sx={{ display: "flex", gap: "5px", mb: 3 }}>
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <span
+                          key={index}
+                          style={{
+                            fontSize: "1.5rem",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ☆
+                        </span>
+                      ))}
+                    </Box>
+                    <button
+                      type="submit"
+                      style={{
+                        padding: "10px 20px",
+                        backgroundColor: "black",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </Box>
+                )}
+                </TabPanel>
+              <TabPanel value={tabIndex} index={4}>
+                <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
+                All About new
+                <hr></hr>
+                </Typography>
               </TabPanel>
             </Paper>
           </>
