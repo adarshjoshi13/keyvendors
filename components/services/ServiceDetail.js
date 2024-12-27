@@ -98,12 +98,16 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                 // pt: 5
               }}
               elevation={1}>
-             <Tabs value={tabIndex} onChange={handleTabChange} variant="fullWidth">
-                <Tab label="Why Us ?" />
-                <Tab label="How it Works" />
-                <Tab label="Customer Reviews" />
-                <Tab label="Blog" href="/blogs/"/>
-              </Tabs>
+                <div style={{textAlign:"center"}}>
+                  <Tabs value={tabIndex} onChange={handleTabChange} variant="fullWidth" sx={{marginBottom:"10px"}}>
+                    <Tab label="Why Us ?" />
+                    <Tab label="How it Works" />
+                    <Tab label="Customer Reviews" />
+                    <Tab label="Blog" href="/blogs/"/>
+                  </Tabs>
+                  <span style={{ color: "#646464" }}>About ac service in ghaziabad in new</span>
+                </div>
+             
               <TabPanel value={tabIndex} index={0}>
                 <Typography variant="h4" gutterBottom sx={{ fontSize: "22px", paddingBottom: "2%" }}>
                   Why Key Vendors?
