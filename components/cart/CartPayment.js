@@ -127,7 +127,8 @@ function CartPayment({ cartItemsList }) {
             furl: `${process.env.HOST}/order/confirm/${orderRes?.transaction_id}`,
           }));
         } else {
-          window.location.href = `/order/confirm/${result.data.orderRes?.transaction_id}`;
+          // window.location.href = `/order/confirm/${result.data.orderRes?.transaction_id}`;
+           window.location.href = `/order/confirm/${result.data?.transaction_id}`;
         }
       }
     // } catch (error) {
