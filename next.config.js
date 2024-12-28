@@ -24,6 +24,10 @@ const rewrites = async (API_URL) => {
 
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    //largePageDataBytes: 128 * 1000, // 128KB by default
+      largePageDataBytes: 128 * 100000,
+    },
   env: {
     HOST: process.env.HOST,
     PAY_URL: process.env.PAY_URL,
@@ -35,7 +39,7 @@ const nextConfig = {
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
   },
   images: {
-    minimumCacheTTL: 600,
+    minimumCacheTTL: 6000,
     domains: [
       "keyvendors.com",
       "www.keyvendors.com",
