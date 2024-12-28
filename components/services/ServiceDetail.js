@@ -138,8 +138,7 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
                 </Typography>
                 <Typography paragraph>
                   <strong>Lowest Prices Guaranteed</strong>
-                  <br />
-                  Keyvendors provides affordable pricing to their customers so that they save up to 40% of what their competitors offer. The reason for lower pricing is because we don't use surcharges on the parts we provide for AC repair and services at low cost.
+                  
                 </Typography>
                 <Typography paragraph>
                   <strong>Free Cancellation And Reschedule</strong>
@@ -182,10 +181,6 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
               <Typography variant="h4" gutterBottom sx={{ fontSize: "22px !important"}}>
                 Customer Reviews
               </Typography>
-              <Box sx={{ color: "#646464", fontSize:"16px" }}>
-                  of AC service in Ghaziabad Professionals in new, Ghaziabad
-                </Box>
-                <hr></hr>
               <Typography
                   variant="h4"
                   gutterBottom

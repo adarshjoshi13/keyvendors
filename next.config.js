@@ -1,25 +1,35 @@
 /** @type {import('next').NextConfig} */
 
 const rewrites = async (API_URL) => {
+  try {
+      // Fetch city routes
+      const citiesResponse = await fetch(`${API_URL}/location/cities`);
+      const citiesRs = await citiesResponse.json();
 
-  const citiesResponse = await fetch(`${API_URL}/location/cities`);
-  const citiesRs = await citiesResponse.json();
-  let citiesOb = citiesRs.data.map((city) => ({
-    source: `/${city.slug}`,
-    destination: `/`,
-  }));
+      const citiesOb = citiesRs?.data?.map((city) => ({
+          source: `/${city.slug}`,
+          destination: `/`,
+      })) || []; // Fallback to an empty array if data is missing
 
-  const staticResponse = await fetch(`${API_URL}/pages`);
-  const staticRs = await staticResponse.json();
-  let staticOb = staticRs.data.map((page) => ({
-    source: `/${page.slug}`,
-    destination: `/static/${page.slug}`,
-  }));
+      // Fetch static page routes
+      const staticResponse = await fetch(`${API_URL}/pages`);
+      const staticRs = await staticResponse.json();
 
-  return [
-    ...citiesOb,
-    ...staticOb
-  ];
+      const staticOb = staticRs?.data?.map((page) => ({
+          source: `/${page.slug}`,
+          destination: `/static/${page.slug}`,
+      })) || []; // Fallback to an empty array if data is missing
+
+      return [
+          ...citiesOb,
+          ...staticOb,
+      ];
+  } catch (error) {
+      console.error("Error generating rewrites:", error);
+
+      // Return an empty array to avoid breaking the build
+      return [];
+  }
 };
 
 const nextConfig = {
@@ -39,7 +49,7 @@ const nextConfig = {
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
   },
   images: {
-    minimumCacheTTL: 6000,
+    minimumCacheTTL: 600,
     domains: [
       "keyvendors.com",
       "www.keyvendors.com",
