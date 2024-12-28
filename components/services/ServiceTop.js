@@ -9,7 +9,7 @@ import ImageWithFallback from "components/style/ImageWithFallback";
 import { useSelector } from "react-redux";
 import { getLocation } from "store/locationSlice";
 
-function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation }) {
+function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation, serviceMetaDetails}) {
   const location = useSelector(getLocation);
   const scrollTo = (ref) => {
     if (ref && ref.current /* + other conditions */) {
@@ -18,7 +18,7 @@ function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation }) {
   };
   return (
     <>
-      <Breadcrumb title={metaInfo.keyword} />
+      <Breadcrumb title={serviceMetaDetails ? serviceMetaDetails.header_title : metaInfo.keyword} />
       <Grid container>
         <Grid item xl={12} xs={12} lg={6}>
           <Box sx={{ py: 1 }}>
@@ -46,13 +46,13 @@ function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation }) {
             <Typography
               component="h1"
               variant="h4"
-              align="left"
+              align="center"
               color="text.primary">
-              {titleWithLocation
-                ? `${metaInfo.keyword} in ${
-                    location ? location.locality : "Delhi/NCR"
-                  }`
-                : service.title}
+              {serviceMetaDetails 
+                ? serviceMetaDetails.header_title 
+                : titleWithLocation
+                  ? `${metaInfo.keyword} in ${location ? location.locality : "Delhi/NCR"}`
+                  : service.title}              
             </Typography>
             <Typography
               component="div"
