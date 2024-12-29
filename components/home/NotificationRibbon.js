@@ -5,6 +5,7 @@ import requestIcon from "public/assets/requestIcon.png";
 import satisfiedIcon from "public/assets/satisfiedIcon.png";
 import customersIcon from "public/assets/customersIcon.png";
 import {fetchOrderSummary} from "services/api";
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import Image from "next/image";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
@@ -49,7 +50,7 @@ export default function NotificationRibbon() {
         </Box>
         <Box sx={{ pl: 2 }} className="mobileCenter">
           <Typography variant="h6">{orderSummar.completed_jobs}</Typography>
-          <Typography variant="body">Completed Jobs</Typography>
+          <Typography variant="body">Completed Services</Typography>
         </Box>
       </Grid>
       <Grid
@@ -70,7 +71,7 @@ export default function NotificationRibbon() {
       <Grid
         className="notificationRibonConent"
         sx={{ p: 1, borderRight: "1px solid #fff" }}
-        lg={3}
+        lg={2}
         xs={6}
         color="primary.main"
         item>
@@ -79,13 +80,13 @@ export default function NotificationRibbon() {
         </Box>
         <Box sx={{ pl: 2 }} className="mobileCenter">
           <Typography variant="h6">{orderSummar.monthly_job_requests}</Typography>
-          <Typography variant="body">Monthly Job Requests</Typography>
+          <Typography variant="body">Monthly Service Requests</Typography>
         </Box>
       </Grid>
       <Grid
         className="notificationRibonConent"
-        sx={{ p: 1, borderRight: { lg: "none", xs: "1px solid #fff" } }}
-        lg={3}
+        sx={{ p: 1, borderRight: "1px solid #fff" }}
+        lg={2}
         xs={6}
         color="primary.main"
         item>
@@ -95,6 +96,21 @@ export default function NotificationRibbon() {
         <Box sx={{ pl: 2 }} className="mobileCenter">
           <Typography variant="h6">{orderSummar.repeat_customers}</Typography>
           <Typography variant="body">Repeat Cutomers</Typography>
+        </Box>
+      </Grid>
+      <Grid
+        className="notificationRibonConent"
+        sx={{ p: 1, borderRight: { lg: "none", xs: "1px solid #fff" } }}
+        lg={2}
+        xs={6}
+        color="primary.main"
+        item>
+        <Box className="circleRadius">
+          <Image src={customersIcon} alt="Why Choose Us" />
+        </Box>
+        <Box sx={{ pl: 2 }} className="mobileCenter">
+          <Typography variant="h6">5 K+</Typography>
+          <Typography variant="body">Technicians</Typography>
         </Box>
       </Grid>
     </Grid>

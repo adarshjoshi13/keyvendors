@@ -9,38 +9,36 @@ export default memo(function ServicesMenu({ items }) {
   const sortedItems = [...items].sort((a, b) => a.children.length - b.children.length);
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)", // Three columns
-        gap: "16px", // Adjust gap between cards
-        padding: "16px", // Add padding around the grid
+        gridTemplateColumns: {
+          xs: "1fr", // Single column for extra-small screens
+          sm: "repeat(2, 1fr)", // Two columns for small screens
+          md: "repeat(3, 1fr)", // Three columns for medium and larger screens
+        },
+        gap: 2, // Consistent spacing between cards
+        p: 2, // Padding around the grid
       }}
     >
       {sortedItems &&
         sortedItems
           .filter(item => item.children.length > 0) // Only show items that have children
           .map((item, index) => (
-            <div
+            <Box
               key={index}
-              style={{
+              sx={{
                 display: "flex",
                 flexDirection: "column",
                 border: "1px solid #ddd",
                 borderRadius: "8px",
-                padding: "16px",
-                boxSizing: "border-box",
-                backgroundColor: index % 3 === 1 ? "#f0f0f0" : "transparent", // Color for the middle column (index 1)
+                p: 2,
+                bgcolor: index % 3 === 1 ? "#f0f0f0" : "transparent", // Color for the middle column
                 transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth transition for hover effect
-              }}
-              // Hover effect for better interactivity
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "none";
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", // Hover effect
+                },
               }}
             >
               {/* Card Header */}
@@ -98,8 +96,8 @@ export default memo(function ServicesMenu({ items }) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Box>
           ))}
-    </div>
+    </Box>
   );
 });

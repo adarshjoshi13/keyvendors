@@ -23,8 +23,8 @@ export function Details({
 }) {
   const location = useSelector(getLocation);
   return (
-    <Grid spacing={2} container>
-      <Grid
+    <Grid>
+      {/* <Grid
         xs={12}
         md={6}
         sm={12}
@@ -56,7 +56,7 @@ export function Details({
             </Link>
           </Typography>
         </Box>
-      </Grid>
+      </Grid> */}
       <Grid
         xs={12}
         sm={12}

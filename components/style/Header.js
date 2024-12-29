@@ -206,7 +206,7 @@ export default function Header({ megaMenuList }) {
               item>
               <Box >
                 <NavigationLink href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none">
-                  <ImageWithFallback alt="Play Store" loading="lazy" width="150" height="50" src="https://www.keyvendors.com/public/images/googlePlay.png" />
+                  <ImageWithFallback alt="Play Store" loading="lazy" width="130" height="50" src="https://www.keyvendors.com/public/images/googlePlay.png" />
                 </NavigationLink>
               </Box>
               <Box sx={{
