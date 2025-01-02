@@ -19,6 +19,7 @@ import useSWR from "swr";
 
 export default function LocationButton({ hideButton }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [locationDisplayName, setLocationDisplayName] = useState(null);
   const location = useSelector(getLocation);
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("bottom-start");
@@ -62,17 +63,20 @@ export default function LocationButton({ hideButton }) {
           }
         );
         if (res.status === 200) {
-          let postal_code = res.data.data.postal_code;
+          let postal_code = res.data.data.address.postcode;
           let resCity = await fetchData(`location/city`, {
             pincode: postal_code,
           });
 
           let location = { ...resCity.data, ...res.data.data };
-          const locality = !location.locality
-            ? { ...location, locality: location.title }
-            : location.locality;
-
+          // console.log(location,'location');
+          
+          const locality = !location.address
+            ? { ...location, locality: location.display_name }
+            : location.address;
           dispatch(configLocation({ ...location, ...locality }));
+
+          setLocationDisplayName(location.display_name);
         }
       } catch (error) {
         console.error(error);
@@ -157,6 +161,7 @@ export default function LocationButton({ hideButton }) {
             isDividerOff={true}
           />
         </Grid>
+        <Box>{locationDisplayName ? locationDisplayName : "Delhi/NCR"}</Box>
       </Grid>
     );
   };

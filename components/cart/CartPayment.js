@@ -93,8 +93,10 @@ function CartPayment({ cartItemsList }) {
       city_id: location?.city_id,
       location_field: location?.location_field,
     };
-
-    // try {
+    
+    // console.log(order);
+    // return false;
+    try {
       const result = await postDataWithUrl(
         `${process.env.HOST}/api/order/place`,
         order
@@ -131,16 +133,16 @@ function CartPayment({ cartItemsList }) {
            window.location.href = `/order/confirm/${result.data?.transaction_id}`;
         }
       }
-    // } catch (error) {
-    //   console.error(error);
-    //   if (error.response?.data) {
-    //     toastMessage(
-    //       "error",
-    //       error.response?.data?.error?.message ||
-    //         error.response?.data?.message
-    //     );
-    //   }
-    // }
+    } catch (error) {
+      console.error(error);
+      if (error.response?.data) {
+        toastMessage(
+          "error",
+          error.response?.data?.error?.message ||
+            error.response?.data?.message
+        );
+      }
+    }
   };
 
   useEffect(() => {

@@ -49,7 +49,6 @@ const autocompleteService = { current: null };
 export default function GoogleLocationSearch({ handleClose }) {
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
-
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
   const dispatch = useDispatch();
@@ -62,7 +61,6 @@ export default function GoogleLocationSearch({ handleClose }) {
         "google-maps"
       );
     }
-
     loaded.current = true;
   }
 
@@ -73,37 +71,41 @@ export default function GoogleLocationSearch({ handleClose }) {
       }, 400),
     []
   );
-  
+
   useEffect(() => {
-    if (value) {
-      (async () => {
-        let res = await fetchDataWithUrl(
-          `${process.env.HOST}/api/location-page/place`,
-          { params: { place_id: value.place_id, location_field: inputValue } }
-        );
-        if (handleClose) {
-          handleClose("bottom-start");
-        }
-        let loc = res.data?.data?.location;
-        let postal_code = res.data?.data?.postal_code;
+    // if (value) {
+    //   (async () => {
+    //     let res = await fetchDataWithUrl(
+    //       `${process.env.HOST}/api/location-place/places`,
+    //       { params: { place_id:  } }
+    //     );
+    //     if (handleClose) {
+    //       handleClose("bottom-start");
+    //     }
+    //     let loc = res.data?.data?.location;
+    //     let postal_code = res.data?.data?.postal_code;
 
-        if (!postal_code) {
-          let res = await fetchDataWithUrl(
-            `${process.env.HOST}/api/location-page/all`,
-            {
-              params: { lat: loc?.lat, lon: loc?.lng },
-            }
-          );
-          postal_code = res?.data?.data?.postal_code;
-        }
+    //     if (!postal_code) {
+    //       let res = await fetchDataWithUrl(
+    //         `${process.env.HOST}/api/location-page/all`,
+    //         {
+    //           params: { lat: loc?.lat, lon: loc?.lng },
+    //         }
+    //       );
+    //       postal_code = res?.data?.data?.postal_code;
+    //     }
 
-        let resCity = await fetchData(`location/city`, {
-          pincode: postal_code,
-        });
-        let locationObj = { ...res.data.data, ...resCity.data };
-        dispatch(configLocation(locationObj));
-      })();
-    }
+    //     let resCity = await fetchData(`location/city`, {
+    //       pincode: postal_code,
+    //     });
+    //     let locationObj = { ...res.data.data, ...resCity.data };
+    //     dispatch(configLocation(locationObj));
+    //   })();
+    // }
+    // value;
+    // inputValue;
+    // let locationObj = { value, inputValue };
+    // dispatch(configLocation(locationObj))
   }, [value, dispatch]);
 
   useEffect(() => {
@@ -240,6 +242,13 @@ export default function GoogleLocationSearch({ handleClose }) {
             </Box>
           );
         }}
+      />
+      <Autocomplete
+        renderInput={(params) => (
+          inputValue ? (
+                    <Typography variant="body1">Location selected: {inputValue}</Typography>
+          ) : (null)
+        )}
       />
     </>
   );

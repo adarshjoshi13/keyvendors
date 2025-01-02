@@ -58,6 +58,15 @@ const VerifyNumber = React.memo(function VerifyNumberC(props) {
     }
   };
 
+  const validateMobileNumber = (mobileNumber) => {
+    const isValid = /^[6-9]\d{9}$/.test(mobileNumber); // Validates a 10-digit Indian mobile number
+    if (isValid) {
+      dispatch(addPhone(mobileNumber));
+    } else {
+      console.log("Invalid mobile number");
+    }
+  };
+
   const startTimer = () => {
     setResendTimer(resendTimer - 1);
     let interval = setInterval(() => {
@@ -79,91 +88,105 @@ const VerifyNumber = React.memo(function VerifyNumberC(props) {
   }, []);
 
   return (
-    <CartAccordion id="verify-number" title="Verify your mobile number">
-      {verified ? (
-        <Grid container spacing={12}>
-          <Grid item>
-            <Typography component="span" variant="body2">
-              Mobile number verified
-            </Typography>
-          </Grid>
-          <Grid item>
-            <CheckCircleIcon style={{ color: "green" }} />
-          </Grid>
+    <CartAccordion id="verify-number" title="Enter your mobile number">
+      <Grid>
+        <Grid item>
+          <TextField
+            required
+            size="small"
+            label="Mobile number"
+            onKeyUp={(e) => validateMobileNumber(e.target.value)}
+          />
         </Grid>
-      ) : (
-        <Grid
-          sx={{
-            display: "flex",
-            justifyContent: { lg: "flex-start", xs: "center" },
-            py: 2,
-          }}
-          spacing={3}
-          container>
-          <Grid item>
-            <TextField
-              required
-              size="small"
-              label="Mobile number"
-              onChange={(e) => setMobile(e.target.value)}
-              disabled={verified}
-              InputLabelProps={{ shrink: true }}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              required
-              size="small"
-              label="Enter OTP here"
-              disabled={disableOtp || verified}
-              onChange={(e) => setOtp(e.target.value)}
-              InputLabelProps={{ shrink: true }}
-            />
-          </Grid>
-          <Grid item>
-            <Button
-              sx={{ borderRadius: 10, width: 200, textTransform: "none" }}
-              size="large"
-              variant="contained"
-              onClick={() => (mobile && otp ? validateOtp() : sendOtp())}
-              disabled={mobile && mobile.length == 10 ? false : true}>
-              {disableOtp ? (
-                <>
-                  Send OTP
-                  <SendToMobileSharp />
-                </>
-              ) : (
-                "Submit"
-              )}
-            </Button>
-          </Grid>
-          {!disableOtp && (
-            <Box sx={{ ml: 3 }}>
-              <Typography component="p" variant="body2" color="green">
-                OTP Sent
-              </Typography>
-              <Typography
-                sx={{ fontSize: 10 }}
-                component="p"
-                variant="body2"
-                color="green">
-                {resendTimer == 15 ? (
-                  <Link
-                    component="button"
-                    variant="body2"
-                    onClick={() => sendOtp()}>
-                    Click here to send again OTP
-                  </Link>
-                ) : (
-                  `Resend In ${resendTimer}`
-                )}
-              </Typography>
-            </Box>
-          )}
-        </Grid>
-      )}
+      </Grid>
     </CartAccordion>
   );
+  // return (
+  //   <CartAccordion id="verify-number" title="Verify your mobile number">
+  //     {verified ? (
+  //       <Grid container spacing={12}>
+  //         <Grid item>
+  //           <Typography component="span" variant="body2">
+  //             Mobile number verified
+  //           </Typography>
+  //         </Grid>
+  //         <Grid item>
+  //           <CheckCircleIcon style={{ color: "green" }} />
+  //         </Grid>
+  //       </Grid>
+  //     ) : (
+  //       <Grid
+  //         sx={{
+  //           display: "flex",
+  //           justifyContent: { lg: "flex-start", xs: "center" },
+  //           py: 2,
+  //         }}
+  //         spacing={3}
+  //         container>
+  //         <Grid item>
+  //           <TextField
+  //             required
+  //             size="small"
+  //             label="Mobile number"
+  //             onChange={(e) => setMobile(e.target.value)}
+  //             disabled={verified}
+  //             InputLabelProps={{ shrink: true }}
+  //           />
+  //         </Grid>
+  //         <Grid item>
+  //           <TextField
+  //             required
+  //             size="small"
+  //             label="Enter OTP here"
+  //             disabled={disableOtp || verified}
+  //             onChange={(e) => setOtp(e.target.value)}
+  //             InputLabelProps={{ shrink: true }}
+  //           />
+  //         </Grid>
+  //         <Grid item>
+  //           <Button
+  //             sx={{ borderRadius: 10, width: 200, textTransform: "none" }}
+  //             size="large"
+  //             variant="contained"
+  //             onClick={() => (mobile && otp ? validateOtp() : sendOtp())}
+  //             disabled={mobile && mobile.length == 10 ? false : true}>
+  //             {disableOtp ? (
+  //               <>
+  //                 Send OTP
+  //                 <SendToMobileSharp />
+  //               </>
+  //             ) : (
+  //               "Submit"
+  //             )}
+  //           </Button>
+  //         </Grid>
+  //         {!disableOtp && (
+  //           <Box sx={{ ml: 3 }}>
+  //             <Typography component="p" variant="body2" color="green">
+  //               OTP Sent
+  //             </Typography>
+  //             <Typography
+  //               sx={{ fontSize: 10 }}
+  //               component="p"
+  //               variant="body2"
+  //               color="green">
+  //               {resendTimer == 15 ? (
+  //                 <Link
+  //                   component="button"
+  //                   variant="body2"
+  //                   onClick={() => sendOtp()}>
+  //                   Click here to send again OTP
+  //                 </Link>
+  //               ) : (
+  //                 `Resend In ${resendTimer}`
+  //               )}
+  //             </Typography>
+  //           </Box>
+  //         )}
+  //       </Grid>
+  //     )}
+  //   </CartAccordion>
+  // );
 });
 
 export default VerifyNumber;

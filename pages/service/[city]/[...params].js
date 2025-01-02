@@ -98,7 +98,6 @@ export default function ServicesPage({ service, metaInfo,selectedService }) {
   if(serviceDetails){
     serviceMetaDetails = serviceDetails;
   }
-  console.log(serviceMetaDetails);
   return (
     <Layout>
       <PageContainer>

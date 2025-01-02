@@ -36,6 +36,7 @@ import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices
 import ImageWithFallback from "./ImageWithFallback";
 import { styled } from "@mui/material/styles";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import googlePlay from "../../public/assets/googlePlay.png";
 
 function MainMenuItem({ page, index }) {
   return (
@@ -205,9 +206,10 @@ export default function Header({ megaMenuList }) {
               }}
               item>
               <Box >
-                <NavigationLink href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none">
-                  <ImageWithFallback alt="Play Store" loading="lazy" width="130" height="50" src="https://www.keyvendors.com/public/images/googlePlay.png" />
-                </NavigationLink>
+                <Link href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none" color="secondary"
+                        overlap="rectangular">
+                  <Image src={googlePlay} alt="Play Store" width={50} />
+                </Link>
               </Box>
               <Box sx={{
                 padding:"10px",

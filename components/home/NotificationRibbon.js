@@ -31,88 +31,101 @@ export default function NotificationRibbon() {
   }, []);
   return (
     <Grid
-      className="columnDirection"
+      container
+      spacing={3}
       sx={{
         p: 2,
         mb: 5,
+        mt: 1,
         backgroundColor: (theme) => theme.palette.subPrimary.main,
+        justifyContent: "center",
+        alignItems: "stretch", // Ensures all items have the same height
       }}
-      container>
-      <Grid
-        className="notificationRibonConent"
-        sx={{ p: 1, borderRight: "1px solid #fff" }}
-        lg={3}
-        xs={6}
-        color="primary.main"
-        item>
-        <Box className="circleRadius">
-          <Image src={completedIcon} alt="Why Choose Us" />
-        </Box>
-        <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">{orderSummar.completed_jobs}</Typography>
-          <Typography variant="body">Completed Services</Typography>
-        </Box>
-      </Grid>
-      <Grid
-        className="notificationRibonConent"
-        sx={{ p: 1, borderRight: "1px solid #fff" }}
-        lg={3}
-        xs={6}
-        color="primary.main"
-        item>
-        <Box className="circleRadius">
-          <Image src={satisfiedIcon} alt="Why Choose Us" />
-        </Box>
-        <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">{orderSummar.satisfied_customers}</Typography>
-          <Typography variant="body">Satisfied Customers</Typography>
-        </Box>
-      </Grid>
-      <Grid
-        className="notificationRibonConent"
-        sx={{ p: 1, borderRight: "1px solid #fff" }}
-        lg={2}
-        xs={6}
-        color="primary.main"
-        item>
-        <Box className="circleRadius">
-          <Image src={requestIcon} alt="Why Choose Us" />
-        </Box>
-        <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">{orderSummar.monthly_job_requests}</Typography>
-          <Typography variant="body">Monthly Service Requests</Typography>
-        </Box>
-      </Grid>
-      <Grid
-        className="notificationRibonConent"
-        sx={{ p: 1, borderRight: "1px solid #fff" }}
-        lg={2}
-        xs={6}
-        color="primary.main"
-        item>
-        <Box className="circleRadius">
-          <Image src={customersIcon} alt="Why Choose Us" />
-        </Box>
-        <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">{orderSummar.repeat_customers}</Typography>
-          <Typography variant="body">Repeat Cutomers</Typography>
-        </Box>
-      </Grid>
-      <Grid
-        className="notificationRibonConent"
-        sx={{ p: 1, borderRight: { lg: "none", xs: "1px solid #fff" } }}
-        lg={2}
-        xs={6}
-        color="primary.main"
-        item>
-        <Box className="circleRadius">
-          <Image src={customersIcon} alt="Why Choose Us" />
-        </Box>
-        <Box sx={{ pl: 2 }} className="mobileCenter">
-          <Typography variant="h6">5 K+</Typography>
-          <Typography variant="body">Technicians</Typography>
-        </Box>
-      </Grid>
+    >
+      {[
+        {
+          icon: completedIcon,
+          value: orderSummar.completed_jobs,
+          label: "Completed Services",
+        },
+        {
+          icon: satisfiedIcon,
+          value: orderSummar.satisfied_customers,
+          label: "Satisfied Customers",
+        },
+        {
+          icon: requestIcon,
+          value: orderSummar.monthly_job_requests,
+          label: "Monthly Service Requests",
+        },
+        {
+          icon: customersIcon,
+          value: orderSummar.repeat_customers,
+          label: "Repeat Customers",
+        },
+        {
+          icon: customersIcon,
+          value: "5K+",
+          label: "Technicians",
+        },
+      ].map((item, index) => (
+        <Grid
+          key={index}
+          item
+          lg={2}
+          md={3}
+          xs={12}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            p: 2,
+            borderRight: {
+              lg: index !== 4 ? "1px solid #fff" : "none", // Remove border for the last item
+              xs: "none",
+            },
+            "&:hover": {
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              transform: "scale(1.05)",
+              transition: "all 0.3s ease",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              width: 60,
+              height: 60,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#fff",
+              borderRadius: "50%",
+              mb: 1,
+            }}
+          >
+            <Image src={item.icon} alt={item.label} />
+          </Box>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: "bold",
+              color: "#fff",
+            }}
+          >
+            {item.value}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#ddd",
+            }}
+          >
+            {item.label}
+          </Typography>
+        </Grid>
+      ))}
     </Grid>
-  );
+  );  
 }

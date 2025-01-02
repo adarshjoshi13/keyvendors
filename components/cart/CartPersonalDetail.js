@@ -167,7 +167,7 @@ function PersonalDetail({ isAddressEdit, handleUpdate }) {
             container
             spacing={2}
             direction="row"
-            justifyContent={"start"}
+            justifyContent={"center"}
             sx={{ py: 4, display: "flex" }}>
             <Grid
               sm={12}
@@ -302,7 +302,7 @@ function PersonalDetail({ isAddressEdit, handleUpdate }) {
               xs={12}
               lg={mainGridLgSize}
               sx={{ display: "flex" }}
-              justifyContent="end"
+              justifyContent="center"
               item>
               <Button
                 type="submit"
