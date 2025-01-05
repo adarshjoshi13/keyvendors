@@ -117,23 +117,25 @@ function CartPayment({ cartItemsList }) {
       }
 
       if (paymentMethod === "online") {
+        
         /* the test params provided by PayUMoney */
         const { orderRes, hash } = result.data;
         setPayUDetail((prevState) => ({
           ...prevState,
-          txnid: orderRes?.transaction_id,
+          txnid: result.data.transaction_id,
           productinfo: "Keyvendors Services",
           amount: order?.cart?.subtotal,
-          email: orderRes?.user?.info.email
-            ? orderRes?.user?.info?.email
+          email: result.data.user.info.email
+            ? result.data.user.info.email
             : "info@keyvendors.com",
-          firstname: orderRes?.user?.info.name,
+          firstname: result.data.user.info.name,
           lastname: "",
-          phone: orderRes?.user?.info?.phone,
-          hash: hash,
+          phone: result.data.user.info.phone,
+          hash: true,
           surl: `${process.env.HOST}/order/confirm/${result.data.transaction_id}`,
           furl: `${process.env.HOST}/order/confirm/${result.data.transaction_id}`,
         }));
+        console.log('payUDetail',payUDetail);
       } else {
         window.location.href = `/order/confirm/${result.data.transaction_id}`;
       }
@@ -187,11 +189,11 @@ function CartPayment({ cartItemsList }) {
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
       {paymentOptions.some((option) => Number(option.ispayment_option) === 1) ? (
         <Grid item>
-          <form ref={form} action={process.env.PAY_URL} method="post">
+          {/* <form ref={form} action={process.env.PAY_URL} method="post">
             {Object.keys(payUDetail).map((key, i) => (
               <input key={i} type="hidden" name={key} value={payUDetail[key]} />
             ))}
-          </form>
+          </form> */}
           <Button
             sx={{ borderRadius: 29, width: 250 }}
             size="large"
