@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo, useNavigate, useLocation } from "react";
 import AddLocationOutlinedIcon from "@mui/icons-material/AddLocationOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MyLocationOutlinedIcon from "@mui/icons-material/MyLocationOutlined";
@@ -17,7 +17,7 @@ import DialogBox from "./DialogBox";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function LocationButton({ hideButton }) {
+export default function LocationButton({ hideButton, opendilog }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [locationDisplayName, setLocationDisplayName] = useState(null);
   const location = useSelector(getLocation);
@@ -41,6 +41,22 @@ export default function LocationButton({ hideButton }) {
     setCityDialogOpen(false);
     if (open) {
       handleClick("bottom-start");
+    }
+
+    if (opendilog) {
+      dispatch(
+        configLocation({ locality: city.slug, ...city})
+      );
+      const path = window.location.pathname;
+      const segments = path.split("/"); 
+      const [lastTwoParams1, lastTwoParams2] = segments.slice(-2);
+      window.location.href = `/service/${city.slug}/${lastTwoParams1}/${lastTwoParams2}`;
+      return {
+        redirect: {
+          destination: `/service/${city.slug}/${lastTwoParams1}/${lastTwoParams2}`,
+          permanent: true,
+        },
+      };
     }
   };
 
@@ -120,9 +136,9 @@ export default function LocationButton({ hideButton }) {
               if (permissionStatus.state === "granted") {
                 getCoordinates(handleLocation);
               } else {
-                // if (!open) {
-                //   handleClick("bottom-start");
-                // }
+                if (!open) {
+                  handleClick("bottom-start");
+                }
               }
             });
         } catch (error) {

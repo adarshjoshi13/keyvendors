@@ -25,7 +25,7 @@ export default function Breadcrumb({title}) {
         </Box>
       </Grid>
       <Grid xs={6} justifyContent="flex-end" container  item>
-        <LocationButton />
+        <LocationButton opendilog={true} />
       </Grid>
     </Grid>
   );

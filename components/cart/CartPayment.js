@@ -90,57 +90,64 @@ function CartPayment({ cartItemsList }) {
       customer: { ...customerDetail },
       longitude: location?.location?.lat,
       latitude: location?.location?.lng,
-      city_id: location?.city_id,
-      location_field: location?.location_field,
+      city_id: location && location.city_id ? location.city_id : location,
+      location_field: location && location.location_field ? location.location_field : location.slug,
     };
     
-    // console.log(order);
+    // console.log('location:', location);
     // return false;
     try {
+      // api/payment/orders
       const result = await postDataWithUrl(
         `${process.env.HOST}/api/order/place`,
         order
       );
-      console.log(result, 'result.status');
-      // return;
-      if (result.data.status == 0) {
-        window.location.href = `/order/confirm/${result.data.transaction_id}`;
-      }else{
-        dispatch(clearCart());
-        if (!authToken && result.data.orderRes?.user) {
-          dispatch(login(result.data.orderRes?.user));
-        } else if (authToken && !authInfo.address && result.data.orderRes?.user) {
-          dispatch(updateInfo(result.data.orderRes?.user.info));
+      console.log(result);
+      if (!result) {
+        alert("Server error. Are you online?");
+        return;
+      }
+      // dispatch(clearCart());
+      if (!authToken && result.data.user) {
+        dispatch(login(result.data.user));
+      } else {
+        if (authToken && !authInfo.address && result.data.user) {
+          dispatch(updateInfo(result.data.user.info));
         }
+      }
 
-        if (paymentMethod === "online") {
-          const { orderRes, hash } = result.data;
-          setPayUDetail((prevState) => ({
-            ...prevState,
-            txnid: orderRes?.transaction_id,
-            productinfo: "Keyvendors Services",
-            amount: order?.cart?.subtotal,
-            email: orderRes?.user?.info.email || "info@keyvendors.com",
-            firstname: orderRes?.user?.info.name,
-            lastname: "",
-            phone: orderRes?.user?.info?.phone,
-            hash,
-            surl: `${process.env.HOST}/order/confirm/${orderRes?.transaction_id}`,
-            furl: `${process.env.HOST}/order/confirm/${orderRes?.transaction_id}`,
-          }));
-        } else {
-          // window.location.href = `/order/confirm/${result.data.orderRes?.transaction_id}`;
-           window.location.href = `/order/confirm/${result.data?.transaction_id}`;
-        }
+      if (paymentMethod === "online") {
+        /* the test params provided by PayUMoney */
+        const { orderRes, hash } = result.data;
+        setPayUDetail((prevState) => ({
+          ...prevState,
+          txnid: orderRes?.transaction_id,
+          productinfo: "Keyvendors Services",
+          amount: order?.cart?.subtotal,
+          email: orderRes?.user?.info.email
+            ? orderRes?.user?.info?.email
+            : "info@keyvendors.com",
+          firstname: orderRes?.user?.info.name,
+          lastname: "",
+          phone: orderRes?.user?.info?.phone,
+          hash: hash,
+          surl: `${process.env.HOST}/order/confirm/${result.data.transaction_id}`,
+          furl: `${process.env.HOST}/order/confirm/${result.data.transaction_id}`,
+        }));
+      } else {
+        window.location.href = `/order/confirm/${result.data.transaction_id}`;
       }
     } catch (error) {
       console.error(error);
       if (error.response?.data) {
-        toastMessage(
-          "error",
-          error.response?.data?.error?.message ||
-            error.response?.data?.message
-        );
+        if (error.response?.data?.error) {
+          toastMessage("error", error?.response?.data?.error?.message);
+        } else {
+          toastMessage("error", error?.response?.data?.message);
+        }
+        console.error(error);
+      } else {
+        console.error(error);
       }
     }
   };

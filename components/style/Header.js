@@ -36,7 +36,7 @@ import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices
 import ImageWithFallback from "./ImageWithFallback";
 import { styled } from "@mui/material/styles";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import googlePlay from "../../public/assets/googlePlay.png";
+import googlePlay from "../../public/assets/pngwing.com.png";
 
 function MainMenuItem({ page, index }) {
   return (
