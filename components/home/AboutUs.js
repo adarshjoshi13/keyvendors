@@ -21,10 +21,11 @@ export default function AboutUs({ content }) {
           <Typography
             variant="body"
             align="justify"
-            sx={{ paddingTop: { xs: 2, sm: 2, md: 2 } }}
+            sx={{ padding: { xs: 2, sm: 2, md: 2 } }}
             dangerouslySetInnerHTML={{
               __html: content,
-            }}></Typography>
+            }}>
+          </Typography>
           <Button
             sx={{ borderRadius: 29, width: 250, marginTop: 2 }}
             className="primary-btn mobileCenter"

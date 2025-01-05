@@ -45,7 +45,7 @@ function MainMenuItem({ page, index }) {
         <MegaMenu
           buttonValue={
             <>
-              {page.icon} 
+              {page.icon}
               {page.title}
             </>
           }
@@ -159,7 +159,7 @@ export default function Header({ megaMenuList }) {
       <AppBar className="appBar" sx={{ height: "4rem" }}>
         <Toolbar>
           <Grid
-            sx={{mt:2, pb:2 }}
+            sx={{ mt: 2, pb: 2 }}
             justifyContent={"end"}
             alignContent={"center"}
             alignItems="center"
@@ -167,8 +167,8 @@ export default function Header({ megaMenuList }) {
             container>
             <Grid lg={1} xs={8} md={11} item>
               <Link href="/" underline="none" color="inherit">
-                  <Image src={logo} width={100} alt="Key Vendors" />
-                </Link>
+                <Image src={logo} width={100} alt="Key Vendors" />
+              </Link>
             </Grid>
             {isLarge && (
               <Grid
@@ -184,37 +184,33 @@ export default function Header({ megaMenuList }) {
                   sx={{
                     display: "flex",
                     display: { xs: "none", md: "none", lg: "flex" },
-                    
-                       }}>
+
+                  }}>
                   {pages.map((page, index) => (
                     <MainMenuItem key={index} page={page} index={index} />
                   ))}
                 </Box>
               </Grid>
             )}
-           
+
             <Grid
               lg={4}
               md={2}
               xs={4}
               sx={{
-                 display: "flex",
-                 alignItems: "center",
+                display: "flex",
+                alignItems: "center",
                 alignContent: "center",
-                justifyContent: { md: "left", xs: "end" },
-                 
+                justifyContent: { md: "end", xs: "end" },
               }}
               item>
               <Box >
                 <Link href="https://play.google.com/store/apps/details?id=in.keyvendors.app" underline="none" color="secondary"
-                        overlap="rectangular">
-                  <Image src={googlePlay} alt="Play Store" width={50} />
+                  overlap="rectangular">
+                  <Image src={googlePlay} alt="Play Store" width={40} />
                 </Link>
               </Box>
-              <Box sx={{
-                padding:"10px",
-              }}>
-                 
+              <Box sx={{ padding: "10px"}}>
                 {notifications && authInfo?.name && notifications.data.data.length > 0 ? (
                   <Badge
                     color="secondary"
@@ -222,10 +218,9 @@ export default function Header({ megaMenuList }) {
                     badgeContent={notifications.data.total || 0}
                   >
                     <NotificationDialogBox notifications={notifications} />
-                    
                   </Badge>
                 ) : (
-                  <Box sx={{ display: "flex", alignItems: "center", padding:"0px"}}>
+                  <Box sx={{ display: "flex", alignItems: "center", padding: "0px" }}>
                     {/* <Typography>No Notifications</Typography> */}
                     <NotificationsIcon />
                     {/* <NotificationDialogBox notifications={notifications} /> */}
@@ -239,7 +234,7 @@ export default function Header({ megaMenuList }) {
                   <Submenu
                     buttonValue={
                       <UserButton
-                        text={authToken ? authInfo.name: "Sign in"}
+                        text={authToken ? authInfo.name : "Sign in"}
                       />
                     }
                     id="login"
@@ -248,7 +243,7 @@ export default function Header({ megaMenuList }) {
                   />
                 </Box>
               )}
-              <Box>
+              <Box sx={{alignItems: "start", alignContent:"start", justifyContent: "start"}} >
                 {cartState ? (
                   <Submenu
                     buttonValue={
