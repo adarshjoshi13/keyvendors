@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { Details } from "./Details";
 import { useIsMobile } from "utils/hooks";
 import ContentBox from "components/style/ContentBox";
+import { getLocation } from "store/locationSlice";
 import { fetchData } from "services/api";
 
 function TabPanel({ children, value, index }) {
@@ -26,6 +27,7 @@ function TabPanel({ children, value, index }) {
 function ServiceDetail({ service, selectedService, refProp, showContent, disableTab, serviceMetaDetails}) {
   const cartState = useSelector(selectCartState);
   const invoiceTotal = useSelector(cartGrandTotal);
+  const location = useSelector(getLocation);
   const selectedSrv = selectedService
     ? selectedService
     : service.children.length
@@ -150,7 +152,7 @@ function ServiceDetail({ service, selectedService, refProp, showContent, disable
 
                 {/* Tab 5: About */}
                 <Tab
-                  label={`About ${serviceMetaDetails ? serviceMetaDetails.seo_keyword : service.title}`}
+                  label={`About ${serviceMetaDetails ? service.title : service.title} in ${location ? location.locality : "Delhi/NCR"}`}
                 />
               </Tabs>
               <TabPanel value={tabIndex} index={0}>

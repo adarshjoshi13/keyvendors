@@ -6,7 +6,7 @@ import { cartData, clearCart, getCustomerDetail } from "store/cartSlice";
 import { getLocation } from "store/locationSlice";
 import { toastMessage } from "utils/utility";
 import CartAccordion from "../style/CartAccordion";
-// import Checkbox from "@mui/material/Checkbox";
+import logo from "../../public/assets/logos/logo1.png";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { Button, Grid, List, ListItem, ListItemText, Checkbox, FormControlLabel } from "@mui/material";
 
@@ -88,73 +88,41 @@ function CartPayment({ cartItemsList }) {
       }
 
       if (paymentMethod === "online") {
-        const txnid = result?.data?.transaction_id || `TXN${new Date().getTime()}`;
+        const orderId = result?.data?.transaction_id || `TXN${new Date().getTime()}`;
         const amount = order.cart?.subtotal || 10;
         const name = result?.data?.user?.info?.name || "Default User";
         const email = result?.data?.user?.info?.email || "info@keyvendors.com";
         const phone = result?.data?.user?.info?.phone || "9999111111";
-
-        // const options = {
-          
-        // };
-
-        // Load Razorpay script dynamically
-        // if (typeof window.Razorpay === "undefined") {
-        //   const script = document.createElement("script");
-        //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        //   script.onload = () => {
-        //     const paymentObject = new window.Razorpay(options);
-        //     paymentObject.open();
-        //   };
-        //   script.onerror = () => {
-        //     alert("Failed to load Razorpay. Please try again.");
-        //   };
-        //   document.body.appendChild(script);
-        // } else {
-        //   const paymentObject = new window.Razorpay(options);
-        //   paymentObject.open();
-        // }
         const options = {
-          key: "rzp_live_KML2JenKCfSplm", // Replace with your Razorpay API key
-          amount: parseFloat(amount) * 100, // Convert to paise
-          currency: "INR",
-          name,
-          description: "Keyvendors Service",
-          order_id: txnid,
-          prefill: { name, email, contact: phone },
-          theme: { color: "#3399cc" },
-          handler: function (response) {
-            console.log("Payment Success Response:", response);
-            // Send payment details to your server for verification
-            // fetch(`${process.env.HOST}/api/order/verify-payment`, {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify({
-            //     razorpay_order_id: response.razorpay_order_id,
-            //     razorpay_payment_id: response.razorpay_payment_id,
-            //     razorpay_signature: response.razorpay_signature,
-            //   }),
-            // })
-            verifyPeyment(`${process.env.HOST}/api/order/verify-payment`, response)
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.success) {
-                  alert("Payment successful!");
-                } else {
-                  alert("Payment verification failed!");
-                }
-              })
-              .catch((error) => console.error("Verification error:", error));
+          key: 'rzp_live_KML2JenKCfSplm',
+          amount: parseFloat(amount) * 100, //  = INR 1
+          // amount: 1 * 100, //  = INR 1
+          name: 'Keyvenders',
+          description: 'some description',
+          image: logo,
+          handler: function(response) {
+              alert(response.razorpay_payment_id);
+              window.location.href = `/order/confirm/${result.data.transaction_id}`;
           },
-        };
+          prefill: {
+              name: name,
+              contact: phone,
+              email: email
+          },
+          notes: {
+              address: 'some address'
+          },
+          theme: {
+              color: 'blue',
+              hide_topbar: false
+          }
+      };
         
         // Initialize Razorpay and handle errors
         if (typeof window.Razorpay === "undefined") {
           const script = document.createElement("script");
           script.src = "https://checkout.razorpay.com/v1/checkout.js";
           script.onload = () => {
-            console.log('options', options);
-            
             const paymentObject = new window.Razorpay(options);
             paymentObject.open();
           };
