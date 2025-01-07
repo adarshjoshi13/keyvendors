@@ -1,18 +1,15 @@
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+
 import { useDispatch, useSelector } from "react-redux";
-import { postDataWithUrl, fetchPeymantOptions} from "services/api";
+import { postDataWithUrl, fetchPeymantOptions, verifyPeyment} from "services/api";
 import { getAuthToken, getAuthInfo, login, updateInfo } from "store/authSlice";
 import { cartData, clearCart, getCustomerDetail } from "store/cartSlice";
 import { getLocation } from "store/locationSlice";
 import { toastMessage } from "utils/utility";
 import CartAccordion from "../style/CartAccordion";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import { useState, useMemo, useRef, useEffect } from "react";
+import { Button, Grid, List, ListItem, ListItemText, Checkbox, FormControlLabel } from "@mui/material";
+
 
 function CartPayment({ cartItemsList }) {
   const cartDetail = useSelector(cartData);
@@ -21,28 +18,15 @@ function CartPayment({ cartItemsList }) {
   const location = useSelector(getLocation);
   const authInfo = useSelector(getAuthInfo);
   const dispatch = useDispatch();
-  const form = useRef(null);
   const [paymentOptions, setPaymentOptions] = useState([]);
-  const [payUDetail, setPayUDetail] = useState({
-    key: process.env.PAY_KEY,
-    txnid: "",
-    productinfo: "",
-    amount: "",
-    email: "",
-    firstname: "",
-    lastname: "",
-    surl: process.env.HOST,
-    furl: process.env.HOST,
-    phone: "",
-    hash: "",
-  });
+  const [acceptedTerms, setAcceptedTerms] = useState(0);
 
+  // Fetch payment options
   const fetchPaymentOptions = async () => {
     try {
-      const response = await fetchPeymantOptions(`paymentmode`);
+      const response = await fetchPeymantOptions("paymentmode");
       if (response.status === 200 && response.data) {
         setPaymentOptions(response.data);
-        console.log("Payment Options:", response.data);
       } else {
         console.error("Failed to fetch payment options:", response.status);
       }
@@ -51,10 +35,7 @@ function CartPayment({ cartItemsList }) {
     }
   };
 
-  useEffect(() => {
-    fetchPaymentOptions();
-  }, []);
-
+  // Payment terms and validation
   const paymentTerms = useMemo(
     () => [
       "For Annual plans, the device should be in working condition",
@@ -63,107 +44,145 @@ function CartPayment({ cartItemsList }) {
     []
   );
 
-  const [acceptedTerms, setAcceptedTerms] = useState(paymentTerms.length);
-
   const isEnable = useMemo(() => {
     return (
       acceptedTerms === paymentTerms.length &&
       cartDetail.cartState > 0 &&
       customerDetail.phone &&
       customerDetail.personal &&
-      Object.keys(customerDetail.slot).length ===
-        Object.keys(cartItemsList).length
+      Object.keys(customerDetail.slot).length === Object.keys(cartItemsList).length
     );
-  }, [
-    acceptedTerms,
-    paymentOptions,
-    cartDetail,
-    customerDetail,
-    cartItemsList,
-    paymentTerms,
-  ]);
+  }, [acceptedTerms, cartDetail, customerDetail, cartItemsList, paymentTerms]);
 
+  // Create order and initiate payment
   const createOrder = async (paymentMethod) => {
-    let order = {
+    const order = {
       paymentMethod,
       cart: { ...cartDetail },
       customer: { ...customerDetail },
       longitude: location?.location?.lat,
       latitude: location?.location?.lng,
-      city_id: location && location.city_id ? location.city_id : location,
-      location_field: location && location.location_field ? location.location_field : location.slug,
+      city_id: location?.city_id || location,
+      location_field: location?.location_field || location.slug,
     };
+    
     
     // console.log('location:', location);
     // return false;
+
+    // console.log('location:', location);
+    // return false;
     try {
-      // api/payment/orders
-      const result = await postDataWithUrl(
-        `${process.env.HOST}/api/order/place`,
-        order
-      );
-      console.log(result);
+      const result = await postDataWithUrl(`${process.env.HOST}/api/order/place`, order);
+
       if (!result) {
         alert("Server error. Are you online?");
         return;
       }
-      // dispatch(clearCart());
+
+      // Update auth info
       if (!authToken && result.data.user) {
         dispatch(login(result.data.user));
-      } else {
-        if (authToken && !authInfo.address && result.data.user) {
-          dispatch(updateInfo(result.data.user.info));
-        }
+      } else if (authToken && !authInfo.address && result.data.user) {
+        dispatch(updateInfo(result.data.user.info));
       }
 
       if (paymentMethod === "online") {
+        const txnid = result?.data?.transaction_id || `TXN${new Date().getTime()}`;
+        const amount = order.cart?.subtotal || 10;
+        const name = result?.data?.user?.info?.name || "Default User";
+        const email = result?.data?.user?.info?.email || "info@keyvendors.com";
+        const phone = result?.data?.user?.info?.phone || "9999111111";
+
+        // const options = {
+          
+        // };
+
+        // Load Razorpay script dynamically
+        // if (typeof window.Razorpay === "undefined") {
+        //   const script = document.createElement("script");
+        //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        //   script.onload = () => {
+        //     const paymentObject = new window.Razorpay(options);
+        //     paymentObject.open();
+        //   };
+        //   script.onerror = () => {
+        //     alert("Failed to load Razorpay. Please try again.");
+        //   };
+        //   document.body.appendChild(script);
+        // } else {
+        //   const paymentObject = new window.Razorpay(options);
+        //   paymentObject.open();
+        // }
+        const options = {
+          key: "rzp_live_KML2JenKCfSplm", // Replace with your Razorpay API key
+          amount: parseFloat(amount) * 100, // Convert to paise
+          currency: "INR",
+          name,
+          description: "Keyvendors Service",
+          order_id: txnid,
+          prefill: { name, email, contact: phone },
+          theme: { color: "#3399cc" },
+          handler: function (response) {
+            console.log("Payment Success Response:", response);
+            // Send payment details to your server for verification
+            // fetch(`${process.env.HOST}/api/order/verify-payment`, {
+            //   method: "POST",
+            //   headers: { "Content-Type": "application/json" },
+            //   body: JSON.stringify({
+            //     razorpay_order_id: response.razorpay_order_id,
+            //     razorpay_payment_id: response.razorpay_payment_id,
+            //     razorpay_signature: response.razorpay_signature,
+            //   }),
+            // })
+            verifyPeyment(`${process.env.HOST}/api/order/verify-payment`, response)
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.success) {
+                  alert("Payment successful!");
+                } else {
+                  alert("Payment verification failed!");
+                }
+              })
+              .catch((error) => console.error("Verification error:", error));
+          },
+        };
         
-        /* the test params provided by PayUMoney */
-        const { orderRes, hash } = result.data;
-        setPayUDetail((prevState) => ({
-          ...prevState,
-          txnid: result.data.transaction_id,
-          productinfo: "Keyvendors Services",
-          amount: order?.cart?.subtotal,
-          email: result.data.user.info.email
-            ? result.data.user.info.email
-            : "info@keyvendors.com",
-          firstname: result.data.user.info.name,
-          lastname: "",
-          phone: result.data.user.info.phone,
-          hash: true,
-          surl: `${process.env.HOST}/order/confirm/${result.data.transaction_id}`,
-          furl: `${process.env.HOST}/order/confirm/${result.data.transaction_id}`,
-        }));
-        console.log('payUDetail',payUDetail);
+        // Initialize Razorpay and handle errors
+        if (typeof window.Razorpay === "undefined") {
+          const script = document.createElement("script");
+          script.src = "https://checkout.razorpay.com/v1/checkout.js";
+          script.onload = () => {
+            console.log('options', options);
+            
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+          };
+          script.onerror = () => {
+            alert("Failed to load Razorpay. Please try again.");
+          };
+          document.body.appendChild(script);
+        } else {
+          const paymentObject = new window.Razorpay(options);
+          paymentObject.open();
+        }
+        
       } else {
         window.location.href = `/order/confirm/${result.data.transaction_id}`;
       }
     } catch (error) {
-      console.error(error);
-      if (error.response?.data) {
-        if (error.response?.data?.error) {
-          toastMessage("error", error?.response?.data?.error?.message);
-        } else {
-          toastMessage("error", error?.response?.data?.message);
-        }
-        console.error(error);
-      } else {
-        console.error(error);
-      }
+      console.error("Error placing order:", error);
+      toastMessage("error", "Failed to create order. Please try again.");
     }
   };
 
+  // Effect to fetch payment options
   useEffect(() => {
-    if (payUDetail.hash) {
-      form.current.submit();
-    }
-  }, [payUDetail]);
+    fetchPaymentOptions();
+  }, []);
 
   const handleTermsChange = (e) => {
-    setAcceptedTerms((prev) =>
-      e.target.checked ? prev + 1 : prev - 1
-    );
+    setAcceptedTerms((prev) => (e.target.checked ? prev + 1 : prev - 1));
   };
 
   return (
@@ -216,11 +235,11 @@ function CartPayment({ cartItemsList }) {
       ) : (
         <>
           <Grid item>
-            <form ref={form} action={process.env.PAY_URL} method="post">
+            {/* <form ref={form} action={process.env.PAY_URL} method="post">
               {Object.keys(payUDetail).map((key, i) => (
                 <input key={i} type="hidden" name={key} value={payUDetail[key]} />
               ))}
-            </form>
+            </form> */}
             <Button
               sx={{ borderRadius: 29, width: 250 }}
               size="large"
@@ -243,3 +262,4 @@ function CartPayment({ cartItemsList }) {
   );
 }
 export default CartPayment;
+
