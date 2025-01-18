@@ -48,12 +48,27 @@ export const getServerSideProps = async (context) => {
       }
     }
 
-    metaInfo = {
-      title: service.title,
-      keyword: service.meta_keyword,
-      description: service.meta_description,
-      setting: { ...setting.data },
-    };
+
+    const matchingLocation = service.location.find((location) => location.city === context.query.city);
+
+    if (matchingLocation) {
+      metaInfo = {
+        title: matchingLocation.seo_title,
+        keyword: `${service.meta_keyword}, ${context.query.city}`,
+        description: `Discover ${service.title} in ${context.query.city}. ${service.meta_description}`,
+        canonical: `${matchingLocation.can_tag}`,
+        setting: { ...setting.data },
+      };
+    } else {
+      metaInfo = {
+        title: service.title,
+        keyword: service.meta_keyword,
+        description: service.meta_description,
+        canonical: `${service.title}`,
+        setting: { ...setting.data },
+      };
+    }
+ 
   } else {
     return {
       notFound: true, //redirects to 404 page

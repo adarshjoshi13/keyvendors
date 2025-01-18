@@ -183,16 +183,16 @@ export default function ServiceItemDetail({ category, services }) {
 
                 </Grid>
               </CardContent>{" "}
-              <ExpandMore
+              {/* <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
                 sx={{ background: "#ffebee" }}
                 aria-label="show more">
                 <ExpandMoreIcon />
-              </ExpandMore>
+              </ExpandMore> */}
             </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
+            {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
                 {service.detail ? (
                   <Box
@@ -207,7 +207,7 @@ export default function ServiceItemDetail({ category, services }) {
                   <ListItems list={featureList} />
                 )}
               </CardContent>
-            </Collapse>
+            </Collapse> */}
           </Card>
         </Box>
       ))}

@@ -109,81 +109,102 @@ export default function StaticPage({ page, title }) {
 
   return (
     <Layout>
-  <HeroHeader title={page ? page.title : title} />
-  <Grid container spacing={4} sx={{ px: 15 }}>
-    {sections.length > 0
-      ? sections.map((section, index) => (
-          <React.Fragment key={index}>
-            {index % 2 ===1 ? (
-              <>
-                <Grid item xs={12} md={6}>
-                  {section.title && <h3 style={{ textAlign: "end", paddingRight: "18px"}}>{section.title}</h3>}
-                  {section.image && (
-                    <Box>
-                      <Image
-                        src={section.image}
-                        alt={section.title || "Section Image"}
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          marginBottom: "1rem",
-                          padding: "18px",
-                          borderRadius:"30px"
+      <HeroHeader title={page ? page.title : title} />
+      <Grid container spacing={4} sx={{ px: { xs: 2, sm: 4, md: 15 } }}>
+        {sections.length > 0
+          ? sections.map((section, index) => (
+              <React.Fragment key={index}>
+                {index % 2 === 1 ? (
+                  <>
+                    <Grid item xs={12} md={6}>
+                      {section.title && (
+                        <h3
+                          style={{
+                            textAlign: "end",
+                            paddingRight: "18px",
+                            fontSize: "1.5rem", // Adjust the font size
+                          }}
+                        >
+                          {section.title}
+                        </h3>
+                      )}
+                      {section.image && (
+                        <Box>
+                          <Image
+                            src={section.image}
+                            alt={section.title || "Section Image"}
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              marginBottom: "1rem",
+                              padding: "18px",
+                              borderRadius: "30px",
+                            }}
+                          />
+                        </Box>
+                      )}
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Box
+                        dangerouslySetInnerHTML={{
+                          __html: highlightText(section.content, wordsToHighlight),
+                        }}
+                        sx={{
+                          textAlign: "justify",
+                          lineHeight: "2",
+                          fontSize: "1rem", // Adjust font size for readability
                         }}
                       />
-                    </Box>
-                  )}
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Box
-                    dangerouslySetInnerHTML={{
-                      __html: highlightText(
-                        section.content,
-                        wordsToHighlight
-                      ),
-                    }}
-                    sx={{ textAlign: "justify", lineHeight: "2" }}
-                  />
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid item xs={12} md={6}>
-                  <Box
-                    dangerouslySetInnerHTML={{
-                      __html: highlightText(
-                        section.content,
-                        wordsToHighlight
-                      ),
-                    }}
-                    sx={{ textAlign: "justify", lineHeight: "2" }}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  {section.title && <h3 style={{ textAlign: "end",paddingRight: "18px" }}>{section.title}</h3>}
-                  {section.image && (
-                    <Box>
-                      <Image
-                        src={section.image}
-                        alt={section.title || "Section Image"}
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          marginBottom: "1rem",
-                          padding: "18px",
-                          borderRadius:"30px"
+                    </Grid>
+                  </>
+                ) : (
+                  <>
+                    <Grid item xs={12} md={6}>
+                      <Box
+                        dangerouslySetInnerHTML={{
+                          __html: highlightText(section.content, wordsToHighlight),
+                        }}
+                        sx={{
+                          textAlign: "justify",
+                          lineHeight: "2",
+                          fontSize: "1rem",
                         }}
                       />
-                    </Box>
-                  )}
-                </Grid>
-              </>
-            )}
-          </React.Fragment>
-        ))
-      : "Content Coming Soon"}
-  </Grid>
-</Layout>
-
-  );
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      {section.title && (
+                        <h3
+                          style={{
+                            textAlign: "end",
+                            paddingRight: "18px",
+                            fontSize: "1.5rem",
+                          }}
+                        >
+                          {section.title}
+                        </h3>
+                      )}
+                      {section.image && (
+                        <Box>
+                          <Image
+                            src={section.image}
+                            alt={section.title || "Section Image"}
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              marginBottom: "1rem",
+                              padding: "18px",
+                              borderRadius: "30px",
+                            }}
+                          />
+                        </Box>
+                      )}
+                    </Grid>
+                  </>
+                )}
+              </React.Fragment>
+            ))
+          : "Content Coming Soon"}
+      </Grid>
+    </Layout>
+  );  
 }

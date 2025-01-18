@@ -6,7 +6,9 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import { Card, CardMedia, CardContent, Typography} from "@mui/material";
 import GoogleLocationSearch from "components/style/GoogleLocationSearch";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
 import IconContent from "components/style/IconContent";
 import PopperContent from "components/style/PopperContent";
 import { useDispatch, useSelector } from "react-redux";
@@ -164,20 +166,20 @@ export default function LocationButton({ hideButton, opendilog }) {
         </Grid>
         <Grid item>
           <IconContent
-            dividerText="Or"
+            // dividerText="Or"
             content="Detect My Location"
             sx={{ color: "red" }}
             clickHandle={() => getCoordinates(handleLocation)}
             icon={<MyLocationOutlinedIcon sx={{ color: "red" }} />}
           />
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <IconContent
             content={<GoogleLocationSearch handleClose={handleClick} />}
             isDividerOff={true}
           />
-        </Grid>
-        <Box>{locationDisplayName ? locationDisplayName : "Delhi/NCR"}</Box>
+        </Grid> */}
+        <Box>{locationDisplayName ? locationDisplayName : ""}</Box>
       </Grid>
     );
   };
@@ -210,20 +212,73 @@ export default function LocationButton({ hideButton, opendilog }) {
       )}
 
       <DialogBox
-        handleClose={() => setCityDialogOpen(true)}
+        handleClose={() => setCityDialogOpen(false)}
         open={cityDialogOpen}
-        title={"Please Select your Service area."}>
+        title={"Please Select your Service Area."}
+        fullWidth // Ensures the dialog uses full width on small screens
+        maxWidth="md" // Limits the dialog width on larger screens
+      >
         <Grid
-          justifyContent={"center"}
-          alignItems={"center"}
-          direction={"row"}
-          spacing={6}
-          container>
+          container
+          justifyContent="center"
+          alignItems="center"
+          spacing={3} // Adjust spacing between cards
+        >
           {cities.map((city, index) => (
-            <Grid key={index} lg={4} item>
-              <Button variant="outlined" onClick={() => handleCitySelect(city)}>
-                {city.title}
-              </Button>
+            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+              <Card
+                sx={{
+                  textAlign: "center",
+                  boxShadow: 3,
+                  borderRadius: 2,
+                  transition: "transform 0.3s ease",
+                  "&:hover": {
+                    transform: "scale(1.05)", // Hover effect
+                  },
+                }}
+              >
+                {/* City SVG Icon */}
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "200px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // marginBottom: 2,
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512"
+                    style={{
+                      maxWidth: "80%",
+                      maxHeight: "80%",
+                      fill: "#1976d2", // You can adjust the color of the SVG here
+                    }}
+                  >
+                    <path d="M616 192H480V24c0-13.3-10.7-24-24-24H312c-13.3 0-24 10.7-24 24v72h-64V16c0-8.8-7.2-16-16-16h-16c-8.8 0-16 7.2-16 16v80h-64V16c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16v80H24c-13.3 0-24 10.7-24 24v360c0 17.7 14.3 32 32 32h576c17.7 0 32-14.3 32-32V216c0-13.3-10.8-24-24-24zM128 404c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm128 192c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm160 96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm160 288c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40z"/>
+                  </svg>
+                </Box>
+
+                {/* City Title and Description */}
+                <CardContent>
+                  {/* Button with Attractive Label */}
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => handleCitySelect(city)}
+                    sx={{
+                      // padding: "10px 20px",
+                      fontSize: "16px",
+                      borderRadius: 50,
+                      borderColor: "#1976d2",
+                    }}
+                  >
+                    {city.title}
+                  </Button>
+                </CardContent>
+              </Card>
             </Grid>
           ))}
         </Grid>
