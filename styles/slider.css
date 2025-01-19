@@ -116,7 +116,8 @@ a.slide__next {
   flex-grow: 0;
   -webkit-box-flex: 0;
   flex-shrink: 0;
-  background-color: rgb(142, 202, 230);
+  /* background-color: rgb(232, 8, 20); */
+  background: linear-gradient(180deg, rgb(237, 6, 6) 0%, rgb(195, 136, 136) 100%);
 }
 .css-pls6ow {
   background-color: #fff;

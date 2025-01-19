@@ -81,7 +81,8 @@ export function SlotSelection({
                 className="slot-item"
                 {...(current == selectedItem && {
                   "is-selected": "true",
-                })}>
+                })}
+              >
                 {!isMobile && (
                   <>
                     <Typography className="slide__date">

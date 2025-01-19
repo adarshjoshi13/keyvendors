@@ -22,8 +22,8 @@ const CartSlot = memo(function CartSlotC({ cartItemsList }) {
   const dispatch = useDispatch();
   const isLarge = useIsLarge();
 
-  const {data:dates}=useSWR("date-list", fetchData,{ revalidateOnFocus: false });
-  const {data:times}=useSWR("time-list",fetchData,{ revalidateOnFocus: false });
+  const { data: dates } = useSWR("date-list", fetchData, { revalidateOnFocus: false });
+  const { data: times } = useSWR("time-list", fetchData, { revalidateOnFocus: false });
 
   const handleAddSlot = (slot) => {
     dispatch(addSlot(slot));
@@ -56,18 +56,18 @@ const CartSlot = memo(function CartSlotC({ cartItemsList }) {
     [getSelectedDateIndex, selectedSlot]
   );
 
-  useEffect(() => {    
+  useEffect(() => {
     let dateArrayLength = dateArray.length;
-    if (dateArrayLength < 1) {  
-        if(dates && times){
-          setDateArray(getSlotFormatDate(dates, times));
-        }          
+    if (dateArrayLength < 1) {
+      if (dates && times) {
+        setDateArray(getSlotFormatDate(dates, times));
+      }
     } else {
       if (selectedService && dateArrayLength > 0) {
         handleCategorySelection(selectedService);
       }
     }
-  }, [dates,times,dateArray, handleCategorySelection, selectedService, cartItemsList]);
+  }, [dates, times, dateArray, handleCategorySelection, selectedService, cartItemsList]);
 
   return (
     <CartAccordion id="service-slot" title="Select Service Slot">
@@ -83,7 +83,8 @@ const CartSlot = memo(function CartSlotC({ cartItemsList }) {
               scrollButtons
               allowScrollButtonsMobile
               variant="scrollable"
-              orientation={isLarge ? "vertical" : "horizontal"}>
+              orientation={isLarge ? "vertical" : "horizontal"}
+            >
               {catIds.map((key, index) => (
                 <Tab
                   key={index + "_item"}
@@ -91,8 +92,7 @@ const CartSlot = memo(function CartSlotC({ cartItemsList }) {
                     display: "flex",
                     border: "1px solid grey",
                     cursor: "pointer",
-                    backgroundColor:
-                      selectedService == key ? "grey" : "lightgray",
+                    backgroundColor: selectedService == key ? "grey" : "lightgray",
                     fontSize: 14,
                     mr: { lg: 5 },
                     ml: 1,
