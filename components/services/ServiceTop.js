@@ -18,7 +18,7 @@ function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation, serviceM
   };
   return (
     <>
-      <Breadcrumb title={serviceMetaDetails ? serviceMetaDetails.header_title : metaInfo.keyword} />
+      <Breadcrumb title={service.title} />
       <Grid container>
         <Grid item xl={12} xs={12} lg={6}>
           <Box sx={{ py: 1 }}>

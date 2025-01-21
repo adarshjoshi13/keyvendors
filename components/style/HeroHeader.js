@@ -1,30 +1,42 @@
 import React from "react";
-import {Box,Typography} from "@mui/material";
+import {Box,Container, Link} from "@mui/material";
 import aboutUs from "public/assets/images/aboutusimage.png";
 import ContactUs from "public/assets/images/contactUs.jpeg";
 import Image from "next/image";
+import ImageWithFallback from "components/style/ImageWithFallback";
+
 
 export function HeroHeader({ title, sx }) {
   const defaultSx = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "20rem",
+    height: { xs: "15rem", sm: "20rem" }, // Responsive height
     backgroundColor: "lightpink",
     overflow: "hidden",
-    ...sx, // Allow additional styles to be passed as props
+    ...sx,
   };
-
+  const width = "0";
+  const height = "0";
   return (
-    <Box sx={defaultSx}>
-      {title === 'About Us' ? (
-        <Image src={aboutUs} width="100%" height="100%" alt="About Us" style={{ objectFit: "cover" }} />
-      ) : (
-        <Image src={ContactUs} width="100%" height="100%" alt="About Us" style={{ objectFit: "cover" }} />
-        // <Typography sx={{ textTransform: "capitalize" }} variant="h2">
-        //   {title}
-        // </Typography>
-      )}
-    </Box>
+      <Box sx={{ mt:1 }}>
+        {/* <Image
+          src={title === "About Us" ? aboutUs : ContactUs}
+          alt={title}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        /> */}
+        <ImageWithFallback                
+          alt="Key Vendors"
+          src={title === "About Us" ? aboutUs : ContactUs}
+          width={width}
+          height={height}
+          lazyOff={false}
+          layout="responsive"
+        />
+      </Box>
   );
 }
