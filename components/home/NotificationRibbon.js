@@ -40,6 +40,7 @@ export default function NotificationRibbon() {
         backgroundColor: (theme) => theme.palette.subPrimary.main,
         justifyContent: "center",
         alignItems: "stretch", // Ensures all items have the same height
+        loading:"lazy"
       }}
     >
       {[

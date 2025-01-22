@@ -54,6 +54,7 @@ export default function Reviews({ title = "Customer Reviews", list }) {
                     alt={card.name}
                     width={40}
                     height={40}
+                    loading="lazy"
                   />
                 </Avatar>
               }

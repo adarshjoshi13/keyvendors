@@ -26,6 +26,7 @@ const location =useLocation();
                       src={image.icon}
                       width={80}
                       height={80}
+                      loading="lazy"
                     />
                     </Link>
                     <Box
