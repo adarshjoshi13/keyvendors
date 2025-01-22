@@ -26,7 +26,8 @@ const persistConfig = {
   key: "root",
   storage,
   whiteList: ["cart","auth","location","authPartnerSlice"],
-  blacklist: []
+  blacklist: [],
+  timeout: 2000,
 };
 
 const rootReducer = combineReducers({

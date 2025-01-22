@@ -17,7 +17,7 @@ export default function WhyUs() {
       <Grid container spacing={2}>
         <Grid lg={7} xs={12} item>
           <Box className="columnDirection" sx={{ pb: 3 }}>
-            <Image src={qualityIcon} alt="Why Choose Us" />
+            <Image src={qualityIcon} alt="Why Choose Us" loading="lazy" />
             <Box sx={{ pl: 2 }}>
               <Typography variant="h6" align="left" gutterBottom>
                 Quality
@@ -29,7 +29,7 @@ export default function WhyUs() {
             </Box>
           </Box>
           <Box className="columnDirection" sx={{ pb: 3 }}>
-            <Image src={conivenceIcon} alt="Why Choose Us" />
+            <Image src={conivenceIcon} alt="Why Choose Us" loading="lazy" />
             <Box sx={{ pl: 2 }}>
               <Typography variant="h6" align="left" gutterBottom>
                 Convenience
@@ -41,7 +41,7 @@ export default function WhyUs() {
             </Box>
           </Box>
           <Box className="columnDirection" sx={{ pb: 3 }}>
-            <Image src={satisfyIcon} alt="Why Choose Us" />
+            <Image src={satisfyIcon} alt="Why Choose Us" loading="lazy" />
             <Box sx={{ pl: 2 }}>
               <Typography variant="h6" align="left" gutterBottom>
                 100% Statisfaction
