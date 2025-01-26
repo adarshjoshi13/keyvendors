@@ -8,7 +8,7 @@ const ImageWithFallback = (props) => {
     return (
         <Image
             {...rest}     
-            {...(lazyOff?{}: {loading:"lazy"})}
+            {...(lazyOff?{}:{loading:"lazy"})}
             alt={alt}
             src={imgSrc?imgSrc:fallbackUrl}
             onError={() => {

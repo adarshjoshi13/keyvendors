@@ -2,42 +2,42 @@
 
 const rewrites = async (API_URL) => {
   try {
-      // Fetch city routes
-      const citiesResponse = await fetch(`${API_URL}/location/cities`);
-      const citiesRs = await citiesResponse.json();
+    // Fetch city routes
+    const citiesResponse = await fetch(`${API_URL}/location/cities`);
+    const citiesRs = await citiesResponse.json();
 
-      const citiesOb = citiesRs?.data?.map((city) => ({
-          source: `/${city.slug}`,
-          destination: `/`,
-      })) || []; // Fallback to an empty array if data is missing
+    const citiesOb = citiesRs?.data?.map((city) => ({
+      source: `/${city.slug}`,
+      destination: `/`,
+    })) || []; // Fallback to an empty array if data is missing
 
-      // Fetch static page routes
-      const staticResponse = await fetch(`${API_URL}/pages`);
-      const staticRs = await staticResponse.json();
+    // Fetch static page routes
+    const staticResponse = await fetch(`${API_URL}/pages`);
+    const staticRs = await staticResponse.json();
 
-      const staticOb = staticRs?.data?.map((page) => ({
-          source: `/${page.slug}`,
-          destination: `/static/${page.slug}`,
-      })) || []; // Fallback to an empty array if data is missing
+    const staticOb = staticRs?.data?.map((page) => ({
+      source: `/${page.slug}`,
+      destination: `/static/${page.slug}`,
+    })) || []; // Fallback to an empty array if data is missing
 
-      return [
-          ...citiesOb,
-          ...staticOb,
-      ];
+    return [
+      ...citiesOb,
+      ...staticOb,
+    ];
   } catch (error) {
-      console.error("Error generating rewrites:", error);
+    console.error("Error generating rewrites:", error);
 
-      // Return an empty array to avoid breaking the build
-      return [];
+    // Return an empty array to avoid breaking the build
+    return [];
   }
 };
 
 const nextConfig = {
   reactStrictMode: true,
   // experimental: {
-    // largePageDataBytes: 200 * 1000, // 200KB by default
-      // largePageDataBytes: 128 * 100000,
-    // },
+  // largePageDataBytes: 200 * 1000, // 200KB by default
+  // largePageDataBytes: 128 * 100000,
+  // },
   env: {
     HOST: process.env.HOST,
     PAY_URL: process.env.PAY_URL,
@@ -49,7 +49,7 @@ const nextConfig = {
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
   },
   images: {
-    minimumCacheTTL: 600,
+    minimumCacheTTL: 6000,
     domains: [
       "keyvendors.com",
       "www.keyvendors.com",

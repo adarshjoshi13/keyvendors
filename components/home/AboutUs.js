@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import aboutUs from "public/assets/images/about.png";
+import aboutusimg from "public/assets/images/about.png";
 import Image from "next/image";
 import ContentBox from "components/style/ContentBox";
 
@@ -10,7 +10,7 @@ export default function AboutUs({ content }) {
     <ContentBox title="About Us" shadowTitle="About Us" sx={{ paddingBottom : "30px"}}>
       <Grid direction={"row"} container>
         <Grid className="mobileCenter" lg={5} md={5} xs={12} item>
-          <Image src={aboutUs} width={330} alt="About Us" loading="lazy" />
+          <Image src={aboutusimg} width={330} alt="About Us" loading="lazy" />
         </Grid>
         <Grid
           item

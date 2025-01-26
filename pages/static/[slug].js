@@ -156,48 +156,48 @@ export default function StaticPage({ page, title }) {
                       />
                     </Grid>
                   </>
-                ) : ( ''
-                  // <>
-                  //   <Grid item xs={12} md={6}>
-                  //     <Box
-                  //       dangerouslySetInnerHTML={{
-                  //         __html: highlightText(section.content, wordsToHighlight),
-                  //       }}
-                  //       sx={{
-                  //         textAlign: "justify",
-                  //         lineHeight: "1.5",
-                  //         fontSize: "1rem",
-                  //       }}
-                  //     />
-                  //   </Grid>
-                  //   <Grid item xs={12} md={6}>
-                  //     {section.title && (
-                  //       <h3
-                  //         style={{
-                  //           textAlign: "end",
-                  //           paddingRight: "10px", // Reduce padding here
-                  //           fontSize: "1.5rem",
-                  //         }}
-                  //       >
-                  //         {section.title}
-                  //       </h3>
-                  //     )}
-                  //     {section.image && (
-                  //       <Box>
-                  //         <Image
-                  //           src={section.image}
-                  //           alt={section.title || "Section Image"}
-                  //           style={{
-                  //             width: "100%",
-                  //             height: "auto",
-                  //             marginBottom: "1rem",
-                  //             borderRadius: "30px",
-                  //           }}
-                  //         />
-                  //       </Box>
-                  //     )}
-                  //   </Grid>
-                  // </>
+                ) : (
+                  <>
+                    <Grid item xs={12} md={6}>
+                      <Box
+                        dangerouslySetInnerHTML={{
+                          __html: highlightText(section.content, wordsToHighlight),
+                        }}
+                        sx={{
+                          textAlign: "justify",
+                          lineHeight: "1.5",
+                          fontSize: "1rem",
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      {section.title && (
+                        <h3
+                          style={{
+                            textAlign: "end",
+                            paddingRight: "10px", // Reduce padding here
+                            fontSize: "1.5rem",
+                          }}
+                        >
+                          {section.title}
+                        </h3>
+                      )}
+                      {section.image && (
+                        <Box>
+                          <Image
+                            src={section.image}
+                            alt={section.title || "Section Image"}
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              marginBottom: "1rem",
+                              borderRadius: "30px",
+                            }}
+                          />
+                        </Box>
+                      )}
+                    </Grid>
+                  </>
                 )
                 }
               </React.Fragment>
