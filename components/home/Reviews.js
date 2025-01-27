@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import { useState, useEffect } from "react";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
@@ -11,14 +10,27 @@ import Title from "components/style/Title";
 import Avatar from "@mui/material/Avatar";
 import CardContent from "@mui/material/CardContent";
 import ImageWithFallback from "components/style/ImageWithFallback";
-export default function Reviews({ title = "Customer Reviews", list }) {
+import { fetchData } from "services/api";
 
+export default function Reviews({ title = "Customer Reviews"}) {
+  const [homeReviews, setHomeReviews] = useState([]);
+  useEffect(() => {
+    const fetchHomeReviews = async () => {
+      try {
+          const response = (await fetchData("testimonials")) || { data: [] };
+          setHomeReviews(response);
+      } catch (error) {
+        console.error("Error fetching banners:", error);
+      }
+    };
+    fetchHomeReviews();
+  }, []);
   return (
     <Box sx={{ paddingBottom : "30px", padding:{xs:"10px",sm:"10px",md:"30px"}}}>
       <ShadowTitle title="Our Reviews" />
       <Title title={title} />
       <Grid container spacing={2}>
-        {list.map((card,index) => (
+        {homeReviews.map((card,index) => (
           <Grid item key={index} xs={12} sm={12} md={6} lg={6}>
             <Card
               sx={{

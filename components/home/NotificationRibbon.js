@@ -17,7 +17,6 @@ export default function NotificationRibbon() {
       const response = await fetchOrderSummary(`ordersummary`);
       if (response.status === 200 && response.data) {
         setOrderSummar(response.data);
-        console.log("Payment Options:", response.data);
       } else {
         console.error("Failed to fetch payment options:", response.status);
       }

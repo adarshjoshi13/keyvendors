@@ -28,12 +28,9 @@ import EmptyCart from "components/cart/EmptyCart";
 import NotificationDialogBox from "components/cart/NotificationDialogbox";
 
 import { setServices, getServices } from "store/servicesSlice";
-import { Typography } from "@mui/material";
 import useSWR from "swr";
 import { setNotifications } from "../../store/notificationsSlice";
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
-import ImageWithFallback from "./ImageWithFallback";
 import { styled } from "@mui/material/styles";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import googlePlay from "../../public/assets/pngwing.com.png";

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import Title from "components/style/Title";
@@ -7,7 +8,25 @@ import ShadowTitle from "components/style/ShadowTitle";
 import Link from "next/link";
 import { getServiceLink } from "utils/utility";
 import { useLocation } from "utils/hooks";
-export default function TopServices({ title, services }) {
+import { fetchData } from "services/api";
+
+export default function TopServices({ title, home_page_category_id }) {
+  const [homePageServices, setHomePageServices] = useState([]);
+    useEffect(() => {
+      const fetchHomePageServices = async () => {
+        try {
+          if (home_page_category_id) {
+            const response = (await fetchData(`get_sub_category?cid=${home_page_category_id}`)) || { data: [],};
+            setHomePageServices(response);
+          }
+          
+        } catch (error) {
+          console.error("Error fetching banners:", error);
+        }
+      };
+  
+      fetchHomePageServices();
+    }, []);
   const location = useLocation();
 
   const settings = {
@@ -28,15 +47,15 @@ export default function TopServices({ title, services }) {
   };
   return (
     <Box sx={{ paddingBottom : "30px"}} className="topservicess">
-      {(title && services) && (
+      {(title && homePageServices) && (
         <>
           <ShadowTitle title={title} />
           <Title title={title} />
         </>
       )}
-      {services && (
+      {homePageServices && (
         <Slider {...settings}>
-          {services.map((card, index) => (
+          {homePageServices.map((card, index) => (
             <Box key={index}>
               <Card
                 raised

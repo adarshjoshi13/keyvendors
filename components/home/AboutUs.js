@@ -1,13 +1,30 @@
 import Grid from "@mui/material/Grid";
+import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import aboutusimg from "public/assets/images/about.png";
 import Image from "next/image";
 import ContentBox from "components/style/ContentBox";
+import { fetchData } from "services/api";
 
-export default function AboutUs({ content }) {
+export default function AboutUs() {
+  const [homeAboutUs, setHomeAboutUs] = useState(""); // Changed to string since "teaser" is a string
+
+  useEffect(() => {
+    const fetchHomeAboutUs = async () => {
+      try {
+        const about = (await fetchData("page/about")) || { data: { teaser: "" } };
+        // const response = about.data.teaser; // Ensure `response` is declared
+        setHomeAboutUs(about.data.teaser);
+      } catch (error) {
+        console.error("Error fetching About Us data:", error);
+      }
+    };
+    fetchHomeAboutUs();
+  }, []);
+
   return (
-    <ContentBox title="About Us" shadowTitle="About Us" sx={{ paddingBottom : "30px"}}>
+    <ContentBox title="About Us" shadowTitle="About Us" sx={{ paddingBottom: "30px" }}>
       <Grid direction={"row"} container>
         <Grid className="mobileCenter" lg={5} md={5} xs={12} item>
           <Image src={aboutusimg} width={330} alt="About Us" loading="lazy" />
@@ -23,7 +40,7 @@ export default function AboutUs({ content }) {
             align="justify"
             sx={{ padding: { xs: 2, sm: 2, md: 2 } }}
             dangerouslySetInnerHTML={{
-              __html: content,
+              __html: homeAboutUs, // Populating the fetched HTML content
             }}>
           </Typography>
           <Button

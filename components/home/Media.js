@@ -1,13 +1,8 @@
-import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Title from "components/style/Title";
 import ShadowTitle from "components/style/ShadowTitle";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
 import Slider from "react-slick";
-import Carousel from "components/style/Carousel/Carousel";
 import { useEffect, useRef, useState } from "react";
 
 const cards = [1, 2, 3, 4];
