@@ -6,13 +6,8 @@ const RawHtml = ({ html = "" }) => (
 );
 
 export function MetaInfo({ metaInfo }) {
-  const { title, keyword, description, setting, other_meta_tags, can_tag } =
-    metaInfo;
-  const canonical_url = can_tag
-    ? can_tag
-    : setting && setting.canonicalUrl
-    ? setting.canonicalUrl
-    : "";
+  const { title, keyword, description, setting, other_meta_tags, canonical } = metaInfo;
+  const canonical_url = canonical && canonical.trim() ? canonical : setting?.canonicalUrl ? setting.canonicalUrl : "";
   return (
     <Head>
       <title>{title}</title>
@@ -24,7 +19,6 @@ export function MetaInfo({ metaInfo }) {
       {canonical_url && (
         <link rel="canonical" href={canonical_url} key="canonical" />
       )}
- 
     </Head>
   );
 }

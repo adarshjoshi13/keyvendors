@@ -9,17 +9,17 @@ import { getLocation } from "store/locationSlice";
 
 function sanitizeString(str) {
   return str
-      .trim()                           // Remove leading/trailing spaces
+      .trim() 
       .replace(/[^a-zA-Z0-9\s-]/g, '')  // Remove special characters except spaces and dashes
       .replace(/\s+/g, '-')             // Replace spaces with dashes
       .toLowerCase();                   // Convert to lowercase
 }
 
 export const getServerSideProps = async (context) => {
-  let params = context.params.params;
+  let params = context.params.params;  
   let service = null;
   let metaInfo = null;
-  let selectedService = null;
+  let slug_city = context.params.city;  
   const setting = await fetchData(`global-setting`);
   if (params.length === 2 || params.length === 1) {
     const catSlug = params.length > 1 ? params[1] : params[0];
@@ -39,51 +39,36 @@ export const getServerSideProps = async (context) => {
         };
       }
     }
+    // if (params[1]) {
+    //   if (service.children.some((child) => child.slug === params[1])) {
+    //     selectedService = params[1];
+    //   }
+    // }
 
-    selectedService = service.children.length ? service.children[0].slug : null;
-
-    if (params[1]) {
-      if (service.children.some((child) => child.slug === params[1])) {
-        selectedService = params[1];
-      }
-    }
-
-
-    const matchingLocation = service.location.find((location) => location.city === context.query.city);
-
-    if (matchingLocation) {
-      metaInfo = {
-        title: matchingLocation.seo_title,
-        keyword: `${service.meta_keyword}, ${context.query.city}`,
-        description: `Discover ${service.title} in ${context.query.city}. ${service.meta_description}`,
-        canonical: `${matchingLocation.can_tag}`,
-        setting: { ...setting.data },
-      };
-    } else {
-      metaInfo = {
-        title: service.title,
-        keyword: service.meta_keyword,
-        description: service.meta_description,
-        canonical: `${service.title}`,
-        setting: { ...setting.data },
-      };
-    }
+    metaInfo = {
+      title: service.title,
+      keyword: service.meta_keyword,
+      description: service.meta_description,
+      canonical: `${slug_city}`,
+      setting: { ...setting.data },
+    };
  
   } else {
     return {
-      notFound: true, //redirects to 404 page
+      notFound: true,
     };
   }
   return {
     props: {
       service,
-      selectedService,
       metaInfo,
+      slug_city,
     },
   };
 };
 
-export default function ServicesPage({ service, metaInfo,selectedService }) {
+export default function ServicesPage({ service, metaInfo, slug_city}) {
+  const selectedService = service.children.length ? service.children[0].slug : null;
   const detailRef = useRef(null);
   let serviceMetaDetails = null;
   const location = useSelector(getLocation);
@@ -92,9 +77,8 @@ export default function ServicesPage({ service, metaInfo,selectedService }) {
     try {              
       const current_location = location ? location.locality : "Delhi/NCR";
       let title = service.title;
-      const sanitizedTitle = sanitizeString(title);            // Sanitize title
-      const sanitizedLocation = sanitizeString(current_location); // Sanitize location
-      const res_service_location = await serviceLocation(`service-location/${sanitizedTitle}-${sanitizedLocation}`);
+      const res_service_location = await serviceLocation(`service-location/${slug_city}`);
+
       const res_location_details = res_service_location.data;
       if (res_service_location.status === 500) {
         setServiceLocationDetails();
