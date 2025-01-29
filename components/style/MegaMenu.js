@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import Button from "@mui/material/Button";
-import PopupState, { bindHover, bindPopover } from "material-ui-popup-state";
+import {PopupState, bindHover, bindPopover } from "material-ui-popup-state";
 import Box from "@mui/material/Box";
-import {ServicesMenu} from "./ServicesMenu";
+import ServicesMenu from "./ServicesMenu";
 import HoverPopover from "material-ui-popup-state/HoverPopover";
 
 export default memo(function MegaMenu({

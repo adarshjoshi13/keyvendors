@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, makeStyles, Typography } from "@mui/material";
+import { Box, makeStyles, Typography, Image } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import clsx from "clsx";
 
@@ -125,7 +125,7 @@ export const FileUpload = ({
           className={classes.noMouseEvent}>
           {imageButton && (
             <Box position="absolute" height={height} width={width}>
-              <img alt="file upload" src={imageUrl} style={imageStyle} />
+              <Image alt="file upload" src={imageUrl} style={imageStyle} />
             </Box>
           )}
 

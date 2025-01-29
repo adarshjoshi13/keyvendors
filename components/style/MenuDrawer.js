@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import AccordionContent from "./AccordionContent";
 import MiscellaneousServicesIcon from "@mui/icons-material/MiscellaneousServices";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {ServicesMenu} from "./ServicesMenu";
+import ServicesMenu from "./ServicesMenu";
 const drawerWidth = "auto"; //"240";
 const anchorPosition = "top";
 
