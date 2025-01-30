@@ -11,19 +11,19 @@ function HeroSlider() {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = (await fetchData("banners")) || { data: [] };        
-        setBanners(response);
+        const response = await fetchData("banners");
+        setBanners(response || []); // Ensure we store an array
       } catch (error) {
         console.error("Error fetching banners:", error);
       }
     };
 
-    fetchBanners();
-  }, []);
+    fetchBanners(); // Call API once on mount
+  }, []); // Empty dependency array ensures it runs only once
 
   const settings = {
     infinite: true,
-    speed: 5,
+    speed: 500, // Adjusted for smoother transition
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -39,7 +39,7 @@ function HeroSlider() {
       {banners.length > 0 ? (
         <Slider {...settings}>
           {banners.map((banner, index) => (
-            <Link key={index} href={banner.link || "/"}>
+            <Link key={index} href={banner.link || "/"} passHref>
               <ImageWithFallback
                 alt="Key Vendors"
                 src={banner.image}
