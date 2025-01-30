@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
   try {
     // Fetch Services
     const servicesResponse = await fetchData("services/menu");
-    const services = servicesResponse?.data ? servicesResponse : { data: [] };
+    const services = servicesResponse ? servicesResponse : { data: [] };
     
     // Fetch Global Settings
     const settingResponse = await fetchData("global-setting");
