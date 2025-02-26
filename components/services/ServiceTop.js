@@ -48,11 +48,7 @@ function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation, serviceM
               variant="h4"
               align="center"
               color="text.primary">
-              {serviceMetaDetails 
-                ? serviceMetaDetails.header_title 
-                : titleWithLocation
-                  ? `${metaInfo.keyword} in ${location ? location.locality : "Delhi/NCR"}`
-                  : service.title}              
+              {service.title ? `${service.title} in ${location ? location.locality : "Delhi/NCR"}` : ''}              
             </Typography>
             <Typography
               component="div"

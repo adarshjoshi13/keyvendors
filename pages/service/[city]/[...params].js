@@ -20,9 +20,10 @@ export const getServerSideProps = async (context) => {
   let service = null;
   let metaInfo = null;
   let slug_city = context.params.city;  
+  let catSlug = null;
   const setting = await fetchData(`global-setting`);
   if (params.length === 2 || params.length === 1) {
-    const catSlug = params.length > 1 ? params[1] : params[0];
+    catSlug = params.length > 1 ? params[1] : params[0];
     const serviceRs = await fetchData(`category_details/${catSlug}`);
     service = serviceRs.data;
     if (serviceRs.status === 500) {
@@ -63,11 +64,12 @@ export const getServerSideProps = async (context) => {
       service,
       metaInfo,
       slug_city,
+      catSlug,
     },
   };
 };
 
-export default function ServicesPage({ service, metaInfo, slug_city}) {
+export default function ServicesPage({ service, metaInfo, slug_city, catSlug}) {
   const selectedService = service.children.length ? service.children[0].slug : null;
   const detailRef = useRef(null);
   let serviceMetaDetails = null;
@@ -77,7 +79,7 @@ export default function ServicesPage({ service, metaInfo, slug_city}) {
     try {              
       const current_location = location ? location.locality : "Delhi/NCR";
       let title = service.title;
-      const res_service_location = await serviceLocation(`service-location/${slug_city}`);
+      const res_service_location = await serviceLocation(`service-location/${slug_city}/${catSlug}`);
 
       const res_location_details = res_service_location.data;
       if (res_service_location.status === 500) {
