@@ -9,6 +9,11 @@ import ImageWithFallback from "components/style/ImageWithFallback";
 import { useSelector } from "react-redux";
 import { getLocation } from "store/locationSlice";
 
+function capitalizeWords(str) {
+  if (!str) return '';
+  return str.replace(/-/g, ' ').replace(/\s+/g, ' ').trim().replace(/\b\w/g, char => char.toUpperCase());
+}
+
 function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation, serviceMetaDetails}) {
   const location = useSelector(getLocation);
   const scrollTo = (ref) => {
@@ -48,7 +53,7 @@ function ServiceTop({ service, scrollToRef, metaInfo,titleWithLocation, serviceM
               variant="h4"
               align="center"
               color="text.primary">
-              {service.title ? `${service.title} in ${location ? location.locality : "Delhi/NCR"}` : ''}              
+              {service.title ? `${capitalizeWords(service.title)} in ${location ? capitalizeWords(location.locality) : "Delhi/NCR"}` : ''}              
             </Typography>
             <Typography
               component="div"

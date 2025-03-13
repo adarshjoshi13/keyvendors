@@ -18,14 +18,16 @@ function sanitizeString(str) {
 export const getServerSideProps = async (context) => {
   let params = context.params.params;  
   let service = null;
+  let location_details = null;
   let metaInfo = null;
   let slug_city = context.params.city;  
   let catSlug = null;
   const setting = await fetchData(`global-setting`);
   if (params.length === 2 || params.length === 1) {
     catSlug = params.length > 1 ? params[1] : params[0];
-    const serviceRs = await fetchData(`category_details/${catSlug}`);
-    service = serviceRs.data;
+    const serviceRs = await fetchData(`category_details/${catSlug}/${slug_city}`);
+    service = serviceRs.data.category;
+    location_details = serviceRs?.data?.location_details || {};
     if (serviceRs.status === 500) {
       return {
         notFound: true, //redirects to 404 page
@@ -47,7 +49,7 @@ export const getServerSideProps = async (context) => {
     // }
 
     metaInfo = {
-      title: service.title,
+      title: location_details?.[0]?.seo_title || service.title || "Default Tiltle",
       keyword: service.meta_keyword,
       description: service.meta_description,
       canonical: `${slug_city}`,
