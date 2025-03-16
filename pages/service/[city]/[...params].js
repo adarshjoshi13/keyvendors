@@ -7,13 +7,6 @@ import { fetchData, serviceLocation } from "services/api";
 import { useSelector } from "react-redux";
 import { getLocation } from "store/locationSlice";
 
-function sanitizeString(str) {
-  return str
-      .trim() 
-      .replace(/[^a-zA-Z0-9\s-]/g, '')  // Remove special characters except spaces and dashes
-      .replace(/\s+/g, '-')             // Replace spaces with dashes
-      .toLowerCase();                   // Convert to lowercase
-}
 
 export const getServerSideProps = async (context) => {
   let params = context.params.params;  
@@ -49,7 +42,8 @@ export const getServerSideProps = async (context) => {
     // }
 
     metaInfo = {
-      title: location_details?.[0]?.seo_title || service.title || "Default Tiltle",
+      title: location_details?.seo_title || service.title || "Default Tiltle",
+      location_details_id: location_details?.id || '',
       keyword: service.meta_keyword,
       description: service.meta_description,
       canonical: `${slug_city}`,
@@ -81,8 +75,7 @@ export default function ServicesPage({ service, metaInfo, slug_city, catSlug}) {
     try {              
       const current_location = location ? location.locality : "Delhi/NCR";
       let title = service.title;
-      const res_service_location = await serviceLocation(`service-location/${slug_city}/${catSlug}`);
-
+      const res_service_location = await serviceLocation(`service-location/${metaInfo.location_details_id}/${catSlug}`);
       const res_location_details = res_service_location.data;
       if (res_service_location.status === 500) {
         setServiceLocationDetails();
